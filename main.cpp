@@ -7,6 +7,9 @@
 
 #include "camera_manipulation.h"
 #include "life_form.h"
+#include "utilities.h"
+#include "body_structure.h"
+#include "physics_model.h"
 
 
 int main ()
@@ -14,34 +17,22 @@ int main ()
     const int screen_width {800};
     const int screen_height {800};
 
+    int text_row[]{120,140,160,180,200,220,240,260,280,300};
+    /*
     const int upper_bound {0};
     const int lower_bound {screen_height};
     const int left_bound {0};
     const int right_bound {screen_width};
+    */
     InitWindow(screen_height,screen_width, "New window");
 
-    double const pi {3.1415};
-
-    double bounciness_coef {0.8};
-
-    double circle_x {screen_width/2};
-    double circle_y {screen_height/2};
-
-    double circle_radius {50};
-
-    double friction {0.02};
-
-    double circle_mass {pi*pi*circle_radius};
+    //float bounciness_coef {0.8f};
+    float friction {0.05f};
 
     //double move_force {100};
 
-    double forward_force {0};
-
-    double x_speed {0};
-    double y_speed {0};
-
-    double accl_x {0};
-    double accl_y {0};
+    float forward_force {0};
+    float rotation_force {0};
 
 //setting up camera
     Vector2 camera_position {screen_width/2,screen_height/2};
@@ -52,13 +43,13 @@ int main ()
     camera.rotation = 0;
     camera.zoom = 1;
 
-    LifeForm player {};
+    Animal player {};
 
 
     SetTargetFPS(60);
     while(WindowShouldClose()==false)
     {
-                // Camera zoom controls
+        // Camera zoom controls
 
         BeginDrawing();
         ClearBackground(WHITE);
@@ -67,8 +58,6 @@ int main ()
         camera.target = camera_position;
         //game logic
         DrawRectangle(0, 0, screen_width, screen_height, GREEN);
-        DrawRectangleRec(player.getBody(), player.getColor());
-
         
         Vector2 init_mouse_pos; //mouse position - tohle dát dopredele a vylepšit nelínbí se mi to
         //mouse camera manipulation
@@ -79,25 +68,46 @@ int main ()
         //reseting ball
         if(IsKeyDown(KEY_X))
         {
-        circle_x = screen_width/2;
-        circle_y = screen_height/2;
-        x_speed = 0;
-        y_speed = 0;
+            player.structure.set_x(screen_width/2);
+            player.structure.set_y(screen_height/2);
+            player.physics.set_velocity(0,0);
+        }
+
+        if(IsKeyDown(KEY_W))
+        {
+            forward_force = 50;
+        }
+        if(IsKeyDown(KEY_S))
+        {
+            forward_force = -50;
+        }
+        if(IsKeyDown(KEY_A))
+        {
+            rotation_force = -1;
+        }
+        if(IsKeyDown(KEY_D))
+        {
+            rotation_force = 1;
         }
 
         //calculating acceleration
-        accl_x = forward_force/player.getWeight();
-        x_speed = accl_x + x_speed;
-        y_speed = accl_y + y_speed;
+        player.physics.set_acc(forward_force, player.structure.get_weight());
+        player.physics.set_rot_acc(rotation_force, player.structure.get_weight());
+
+        player.physics.add_velocity(player.physics.get_acc());
+        player.physics.add_rot_velocity(player.physics.get_rot_acc());
+
+
 
         //moving
-        circle_x += x_speed;
-        circle_y += y_speed;
+        player.update_movement();
+        player.update_rotation();
+        player.update_draw(); //tady někde bude chyba
 
         //friction
-        x_speed -= x_speed*friction;
-        y_speed -= y_speed*friction;
-
+        player.physics.add_velocity(friction_calc(friction,player.physics.get_velocity())); //friction
+        player.physics.add_rot_velocity(friction_calc(friction,player.physics.get_rot_velocity())); //friction
+/*
         //boundary cap (doesnt really work properly on high speeds)
         if(circle_x+circle_radius > right_bound) circle_x = right_bound-circle_radius;
         else if(circle_x-circle_radius < left_bound) circle_x = left_bound+circle_radius;
@@ -110,7 +120,19 @@ int main ()
         else if(((circle_y-circle_radius)-upper_bound)==0) y_speed *= -1*bounciness_coef;
         else if (lower_bound-(circle_y+circle_radius)==0) y_speed *= -1*bounciness_coef;
 
+*/      
+        DrawText(TextFormat("Obj. velocity: %04.02f p/s", player.physics.get_velocity()*60), 100, text_row[0], 15, BLACK);
+        DrawText(TextFormat("Rot. velocity: %04.02f ", player.physics.get_rot_velocity()*60*180/PI), 100, text_row[1], 15, BLACK);
+        DrawText(TextFormat("Forward force: %03i", forward_force), 100, text_row[2], 15, BLACK);
+        DrawText(TextFormat("Rotation force: %03i", rotation_force), 100, text_row[3], 15, BLACK);
+        DrawText(TextFormat("Elapsed Time: %02.02f ms", GetTime()), 100, text_row[4], 15, BLACK);
+        DrawText(TextFormat("FPS: %03i", GetFPS()), 100, text_row[5], 15, BLACK);
+        DrawText(TextFormat("X pos: %02.02f", player.structure.get_centre_x()), 100, text_row[6], 15, BLACK);
+        DrawText(TextFormat("Y pos: %02.02f", player.structure.get_centre_y()), 100, text_row[7], 15, BLACK);
+        DrawText(TextFormat("Y pos: %02i", player.get_animal_count()), 100, text_row[8], 15, BLACK);
+
         forward_force = 0;
+        rotation_force = 0;
         EndMode2D();
         EndDrawing();
     }
