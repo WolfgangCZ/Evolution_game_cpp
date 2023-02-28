@@ -4,17 +4,14 @@
 #include "raylib.h"
 #include "physics_model.h"
 #include "body_structure.h"
-
+#include "brain.h"
 
 class LifeForm
 {
     public:
     virtual void update_draw();
-
     virtual void update_movement();
-
     virtual void update_rotation();
-
 };
 
 class Animal : public LifeForm
@@ -25,7 +22,7 @@ class Animal : public LifeForm
     //subclasses
     BodyStructure structure;
     PhysicsModel physics;
-    //BrainWiring brain_wiring;
+    BrainWiring brain_wiring;
     //PhysicalAttributes attributes;
 
     //constr
