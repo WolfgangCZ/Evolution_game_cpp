@@ -4,42 +4,32 @@
 #include <vector>
 #include "raylib.h"
 
-
+//connection
+//
 class NodeConnection
 {
-    public:
-        NodeConnection()
-        {}
-        ~NodeConnection()
-        {}
     protected:
-        unsigned short int in_node;
-        unsigned short int out_node;
-        short int weight_id {static_cast<short int>(GetRandomValue(-32767,32767))};
-        float weight_fl {static_cast<float>(weight_id)/32767*4};
-
+        int m_in_layer {0};
+        int m_out_layer {0};
+        int m_in_node {0};
+        int m_out_node {0};
+        int m_input {0};
+        int m_output {0};
+        float m_weight {0.1569};
 };
 
+//wiring of all nodes
 class NodeWiring : public NodeConnection
 {
-    public:
-        NodeWiring()
-        {}
-        ~NodeWiring()
-        {}
-        std::vector<NodeWiring> wiring{};
+    protected:
+        std::vector<NodeConnection> wiring;
 };
 
-class BrainWiring
+
+
+class Brain
 {
-    public:
-    BrainWiring()
-    {}
-    ~BrainWiring()
-    {}
-    int action_func_set[20]{};
-    int senses_func_set[20]{};
-    int hidden_nodes_func[30]{};
+
 };
 
 

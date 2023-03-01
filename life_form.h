@@ -22,7 +22,7 @@ class Animal : public LifeForm
     //subclasses
     BodyStructure structure;
     PhysicsModel physics;
-    BrainWiring brain_wiring;
+    //BrainWiring brain_wiring;
     //PhysicalAttributes attributes;
 
     //constr

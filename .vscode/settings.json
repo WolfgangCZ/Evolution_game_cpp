@@ -55,6 +55,7 @@
 		"cinttypes": "cpp",
 		"typeinfo": "cpp",
 		"cstring": "cpp",
-		"ctime": "cpp"
+		"ctime": "cpp",
+		"world_actions": "c"
 	}
 }

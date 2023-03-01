@@ -5,15 +5,19 @@
 #include <ctime>
 #include "raylib.h"
 
+#include "world.h"
 #include "camera_manipulation.h"
 #include "life_form.h"
 #include "utilities.h"
 #include "body_structure.h"
 #include "physics_model.h"
+#include "keyboard.h"
 
 
 int main ()
 {
+    WorldPopulation all_animals{};
+    LifeForm *ptr {nullptr};
     const int screen_width {800};
     const int screen_height {800};
 
@@ -73,22 +77,7 @@ int main ()
             player.physics.set_velocity(0,0);
         }
 
-        if(IsKeyDown(KEY_W))
-        {
-            forward_force = 50;
-        }
-        if(IsKeyDown(KEY_S))
-        {
-            forward_force = -50;
-        }
-        if(IsKeyDown(KEY_A))
-        {
-            rotation_force = -1;
-        }
-        if(IsKeyDown(KEY_D))
-        {
-            rotation_force = 1;
-        }
+        keyboard_controls(forward_force, rotation_force, all_animals);
 
         //calculating acceleration
         player.physics.set_acc(forward_force, player.structure.get_weight());
@@ -103,6 +92,9 @@ int main ()
         player.update_movement();
         player.update_rotation();
         player.update_draw(); //tady někde bude chyba
+        all_animals.draw_animals(ptr);
+        all_animals.update_animals_movement(ptr);
+        all_animals.update_rotation_movement(ptr);
 
         //friction
         player.physics.add_velocity(friction_calc(friction,player.physics.get_velocity())); //friction
