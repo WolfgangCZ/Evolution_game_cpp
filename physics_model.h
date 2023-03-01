@@ -2,8 +2,19 @@
 #define PHYSICS_MODEL_H
 #include "raylib.h"
 
-//class for calculating velocity of object, acceleration, rotation velocity
-// rotation acceleration and angle (direction 0 north clockwise+ in rads)
+/*
+class for store physics model, which are gonna be all physics parametrs (excluding factual position and rotation)
+
+so far parameters 
+    - velocity(+ forward,- backward)
+    - rotation (+ right, - left), rotation is stored as rads, not degrees!
+    - weight (which is just area)
+
+i should probably somehow move weight here i guess to be correct about physics, maybe even position and rotation? 
+that could be hard to move cause position, rotation and weight is tightly tied to structure i guess(LOOK INTO IT)
+
+MODIFY direction rename to angle to better clarity i guess (angle is in rads as default)
+*/
 
 class PhysicsModel
 {

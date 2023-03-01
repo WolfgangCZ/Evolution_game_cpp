@@ -3,11 +3,13 @@
 #include "raylib.h"
 
 /*
-body structure defines all the physical object on named animal, plant, resource or obstacle
+body structure defines all the physical objects on named animal, plant, resource or obstacle and dimensional properties (like position and rotation)
 members:
     - position = position x,y as vector2 
     - size = one size of rectanhle (default 20)
     - weight = area of rectangle
+    - color = color of rectangle (its gonna serve as classification of its purpose or characteristics in future)
+functions serve as movement and rotation tools and also as modifying these things (self explanatory)
 */
 
 class BodyStructure

@@ -1,6 +1,7 @@
 #include "raylib.h"
 #include "camera_manipulation.h"
 
+
 void mouse_cam_manipulation(Vector2 &camera_position, Vector2 &init_mouse_pos)
 {
 

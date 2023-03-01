@@ -3,6 +3,11 @@
 
 #include "raylib.h"
 
+/*
+these functions serve as camera manipulators (self explanatory)
+*/
+
+
 //manipulation using mouse wheel
 void mouse_cam_manipulation(Vector2 &camera_position, Vector2 &init_mouse_pos);
 

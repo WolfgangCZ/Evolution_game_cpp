@@ -4,6 +4,12 @@
 #include "life_form.h"
 #include <vector>
 
+/*
+world population store all living life forms as dynamic array
+functions in this class serve as updates for each frame (or some cycle based on performance in future? maybe)
+also there is function for dynamicaly adding new creatures and plants or inherited creatures based on reproduction
+*/
+
 class WorldPopulation
 {
     public:

@@ -5,7 +5,6 @@
 #include "utilities.h"
 
 
-
 float calculate_x_from_orto(float lenght, float angle_rads)
 {
     return std::sin(angle_rads)*lenght;
@@ -50,6 +49,16 @@ float calculate_angle_xy(float x, float y)
     }
     return 0;
 }
+
+float degrees_to_rads(float value)
+{
+    return value/180*PI;
+}
+float rads_to_degrees(float value)
+{
+    return value*180/PI;
+}
+
 
 float friction_calc(float friction, float velocity)
 {   

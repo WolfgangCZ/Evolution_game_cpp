@@ -1,3 +1,8 @@
+/*
+class of all actions possible with array of said functions
+each action when called perform said action in lifeform:animal
+*/
+
 class Actions
 {
     public:

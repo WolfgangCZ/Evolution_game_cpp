@@ -6,6 +6,21 @@
 #include "body_structure.h"
 #include "brain.h"
 
+/*
+classes for all lifeforms (plants and animals)
+base class serve only as to call functions in animals and plants classes with pointer in one go (nothing else yet)
+
+derived class animals
+store all subclasses(not inherited classes) as parameters and to call manipulation and modifying functions 
+(like updating movement and stuff) and acces point for all subclasses 
+also has static value for animal count (which  could may be better in worldpopulation class)
+each animal gets unique id based on order in all living and non living objects in which were created
+derived class plants
+NOT IMPLEMENTED
+store all subclasses for plants which is gonna be structure and maybe physical attributes (but thats gonna be maybe plant_attributes)
+IMPORTANT animal attributes should be renamed to animal attributes cause those attributes are gonna be wildly different from plants
+*/
+
 class LifeForm
 {
     public:
@@ -40,7 +55,7 @@ class Animal : public LifeForm
     virtual void update_movement() override;         //update position x and y position
     virtual void update_rotation() override;         
     //getters
-    unsigned int get_animal_count();
+    unsigned int get_animal_count(); //doesnt work properly with implemented dyn array of all animals
     //unsigned int get_animal_ID();
 
     //setters

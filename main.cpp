@@ -13,6 +13,13 @@
 #include "physics_model.h"
 #include "keyboard.h"
 
+/*
+WHAT TO ADD:
+function for text drawing
+function for player movement (to clean things up a little)
+somehow improve camera manipulation to clean those lines of code
+
+*/
 
 int main ()
 {
@@ -21,20 +28,16 @@ int main ()
     const int screen_width {800};
     const int screen_height {800};
 
+    //some parameters for drawing text at the end
     int text_row[]{120,140,160,180,200,220,240,260,280,300};
-    /*
-    const int upper_bound {0};
-    const int lower_bound {screen_height};
-    const int left_bound {0};
-    const int right_bound {screen_width};
-    */
+    int text_column {100};
+    int text_size {15};
+
     InitWindow(screen_height,screen_width, "New window");
 
-    //float bounciness_coef {0.8f};
     float friction {0.05f};
 
-    //double move_force {100};
-
+    //forward and rotation force set to 0, modifying on the run based on inputs
     float forward_force {0};
     float rotation_force {0};
 
@@ -53,23 +56,27 @@ int main ()
     SetTargetFPS(60);
     while(WindowShouldClose()==false)
     {
-        // Camera zoom controls
+        //-------------------------------------------------------------------------------
+        //GAME LOGIC
+        //-------------------------------------------------------------------------------
 
+        // Camera zoom controls
         BeginDrawing();
         ClearBackground(WHITE);
         BeginMode2D(camera);
         
         camera.target = camera_position;
-        //game logic
         DrawRectangle(0, 0, screen_width, screen_height, GREEN);
-        
-        Vector2 init_mouse_pos; //mouse position - tohle dát dopredele a vylepšit nelínbí se mi to
+        //mouse position - get rid of this cause camera manipulation by using mouse wheel is wonky as fuck
+        Vector2 init_mouse_pos;
+
+
         //mouse camera manipulation
         mouse_cam_manipulation(camera_position, init_mouse_pos);
         keyboard_cam_manipulation(camera_position);
         cam_zooming(camera);
 
-        //reseting ball
+        //reseting player obj to center of screen (angle conserved)
         if(IsKeyDown(KEY_X))
         {
             player.structure.set_x(screen_width/2);
@@ -77,29 +84,31 @@ int main ()
             player.physics.set_velocity(0,0);
         }
 
-        keyboard_controls(forward_force, rotation_force, all_animals);
+        //make it BETTER!!!!!!!! SOMEHOW
+        keyboard_controls(forward_force, rotation_force, all_animals); 
 
-        //calculating acceleration
+        //calculating acceleration for player obj
         player.physics.set_acc(forward_force, player.structure.get_weight());
         player.physics.set_rot_acc(rotation_force, player.structure.get_weight());
-
+        //by passing acceleration we get velocity for player obj
         player.physics.add_velocity(player.physics.get_acc());
         player.physics.add_rot_velocity(player.physics.get_rot_acc());
 
-
-
-        //moving
+        //moving player (can be shrinked to one function i guess)
         player.update_movement();
         player.update_rotation();
-        player.update_draw(); //tady někde bude chyba
+        player.update_draw();
+
+        //moving population (can be shrinked to one function i guess)
         all_animals.draw_animals(ptr);
         all_animals.update_animals_movement(ptr);
         all_animals.update_rotation_movement(ptr);
 
-        //friction
+        //friction for player
         player.physics.add_velocity(friction_calc(friction,player.physics.get_velocity())); //friction
         player.physics.add_rot_velocity(friction_calc(friction,player.physics.get_rot_velocity())); //friction
 /*
+        //function for bouncing of boundaries, doesnt really work now when i made player obj
         //boundary cap (doesnt really work properly on high speeds)
         if(circle_x+circle_radius > right_bound) circle_x = right_bound-circle_radius;
         else if(circle_x-circle_radius < left_bound) circle_x = left_bound+circle_radius;
@@ -113,15 +122,23 @@ int main ()
         else if (lower_bound-(circle_y+circle_radius)==0) y_speed *= -1*bounciness_coef;
 
 */      
-        DrawText(TextFormat("Obj. velocity: %04.02f p/s", player.physics.get_velocity()*60), 100, text_row[0], 15, BLACK);
-        DrawText(TextFormat("Rot. velocity: %04.02f ", player.physics.get_rot_velocity()*60*180/PI), 100, text_row[1], 15, BLACK);
-        DrawText(TextFormat("Forward force: %03i", forward_force), 100, text_row[2], 15, BLACK);
-        DrawText(TextFormat("Rotation force: %03i", rotation_force), 100, text_row[3], 15, BLACK);
-        DrawText(TextFormat("Elapsed Time: %02.02f ms", GetTime()), 100, text_row[4], 15, BLACK);
-        DrawText(TextFormat("FPS: %03i", GetFPS()), 100, text_row[5], 15, BLACK);
-        DrawText(TextFormat("X pos: %02.02f", player.structure.get_centre_x()), 100, text_row[6], 15, BLACK);
-        DrawText(TextFormat("Y pos: %02.02f", player.structure.get_centre_y()), 100, text_row[7], 15, BLACK);
-        DrawText(TextFormat("Y pos: %02i", player.get_animal_count()), 100, text_row[8], 15, BLACK);
+        
+
+        //-------------------------------------------------------------------------------
+        //GAME LOGIC END
+        //-------------------------------------------------------------------------------
+        //draw parameters of player (self explaantory in descrition for each draw)
+        DrawText(TextFormat("Obj. velocity: %04.02f p/s", player.physics.get_velocity()*60), text_column, text_row[0], text_size, BLACK);
+        DrawText(TextFormat("Rot. velocity: %04.02f ", rads_to_degrees(player.physics.get_rot_velocity())*60), text_column, text_row[1], text_size, BLACK);
+        DrawText(TextFormat("Forward force: %03i", forward_force), text_column, text_row[2], text_size, BLACK);
+        DrawText(TextFormat("Rotation force: %03i", rotation_force), text_column, text_row[3], text_size, BLACK);
+        DrawText(TextFormat("Elapsed Time: %02.02f ms", GetTime()), text_column, text_row[4], text_size, BLACK);
+        DrawText(TextFormat("FPS: %03i", GetFPS()), text_column, text_row[5], 15, BLACK);
+        DrawText(TextFormat("X pos: %02.02f", player.structure.get_centre_x()), text_column, text_row[6], text_size, BLACK);
+        DrawText(TextFormat("Y pos: %02.02f", player.structure.get_centre_y()), text_column, text_row[7], text_size, BLACK);
+        DrawText(TextFormat("non player animal count: %02i", all_animals.world_animals.size()), text_column, text_row[8], text_size, BLACK);
+        DrawText(TextFormat("rotation: %02.02f", rads_to_degrees(player.physics.get_direction())), text_column, text_row[9], text_size, BLACK);
+
 
         forward_force = 0;
         rotation_force = 0;
