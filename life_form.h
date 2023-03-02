@@ -24,6 +24,12 @@ IMPORTANT animal attributes should be renamed to animal attributes cause those a
 class LifeForm
 {
     public:
+    LifeForm()
+    {}
+    virtual ~LifeForm()
+    {}
+
+
     virtual void update_draw();
     virtual void update_movement();
     virtual void update_rotation();
@@ -45,7 +51,7 @@ class Animal : public LifeForm
     {
         animal_count++;
     }
-    ~Animal()
+    virtual ~Animal()
     {
         animal_count--;
     }

@@ -42,6 +42,14 @@ void Animal::update_movement()
 void Animal::update_rotation()
 {
     physics.add_direction(physics.get_rot_velocity());
+    if(physics.get_direction()>2*PI)
+    {
+        physics.add_direction(-2*PI);
+    }
+    else if(physics.get_direction()<0)
+    {
+        physics.add_direction(2*PI);
+    }
 }
 
 unsigned int Animal::get_animal_count()
