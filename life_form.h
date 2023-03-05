@@ -5,6 +5,7 @@
 #include "physics_model.h"
 #include "body_structure.h"
 #include "brain.h"
+#include "attributes.h"
 
 /*
 classes for all lifeforms (plants and animals)

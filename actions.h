@@ -1,3 +1,6 @@
+#ifndef ACTIONS_H
+#define ACTIONS_H
+
 /*
 class of all actions possible with array of said functions
 each action when called perform said action in lifeform:animal
@@ -25,3 +28,4 @@ class Actions
     };
 };
 
+#endif //ACTIONS_H
