@@ -1,18 +1,37 @@
 #ifndef ATTRIBUTES_H
 #define ATTRIBUTES_H
 
-class anim_attributes
+class AnimAttr
 {
-
-public:
-        anim_attributes()
+    public:
+        AnimAttr()
         {}
-        ~anim_attributes()
+        ~AnimAttr()
         {}
     private:
         int move_strenght {50};
         int rot_strenght {1};
+        float health {100};
+        float age {0};
+        float energy {0};
 };
+
+class PlantAttr
+{
+    public:
+        PlantAttr()
+        {}
+        ~PlantAttr()
+        {}
+    private:
+        int move_strenght {50};
+        int rot_strenght {1};
+        float health {100};
+        float age {0};
+        float energy {0};
+};
+
+
 
 
 #endif //ATTRIBUTES_H

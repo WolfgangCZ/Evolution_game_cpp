@@ -8,10 +8,10 @@
 connection node define one single connection 
 single connection is connection between two cells (action, sense or hidden cell)
 first two parametrs are layers passed as number 1 - sense, 2 - action, 3,4,5,6... hidden
-NOT YET IMPLEMNTED each nodeconnection generate string as information about connection
+NOT YET IMPLEMNTED each Synapse generate string as information about connection
 */
 
-class NodeConnection
+class Synapse
 {
     protected:
         int m_in_layer {0};
@@ -25,14 +25,14 @@ class NodeConnection
 
 /*
 NOT YET IMPLEMNTED brain wiring store all node connections as array
-NOT YET IMPLEMNTED when constructing wiring, all invalid nodeconnections are discarded without replacement
+NOT YET IMPLEMNTED when constructing wiring, all invalid Synapses are discarded without replacement
 NOT YET IMPLEMNTED node wiring take all strings (genetic information about each connection) 
 NOT YET IMPLEMNTED node wiring also takes all  strings from node connection and create one huge string about all brain connection for further duplicating organisms
 */
-class NodeWiring : public NodeConnection
+class SynapseWiring : public Synapse
 {
     protected:
-        std::vector<NodeConnection> wiring;
+        std::vector<Synapse> wiring;
 };
 
 /*

@@ -22,6 +22,8 @@ store all subclasses for plants which is gonna be structure and maybe physical a
 IMPORTANT animal attributes should be renamed to animal attributes cause those attributes are gonna be wildly different from plants
 */
 
+//IMPORTANT move definitions to cpp
+
 class LifeForm
 {
     public:
@@ -29,7 +31,6 @@ class LifeForm
     {}
     virtual ~LifeForm()
     {}
-
 
     virtual void update_draw();
     virtual void update_movement();
@@ -39,43 +40,55 @@ class LifeForm
 class Animal : public LifeForm
 {
     public:
-    //animal count
+        //animal count
 
-    //subclasses
-    BodyStructure structure;
-    PhysicsModel physics;
-    //BrainWiring brain_wiring;
-    //PhysicalAttributes attributes;
+        //subclasses
+        BodyStructure structure;
+        PhysicsModel physics;
+        //BrainWiring brain_wiring;
+        //PhysicalAttributes attributes;
 
-    //constr
-    Animal()
-    {
-        animal_count++;
-    }
-    virtual ~Animal()
-    {
-        animal_count--;
-    }
-    
-    //functions
-    virtual void update_draw() override;            //update of drawing rectangle pro
-    virtual void update_movement() override;         //update position x and y position
-    virtual void update_rotation() override;         
-    //getters
-    unsigned int get_animal_count(); //doesnt work properly with implemented dyn array of all animals
-    //unsigned int get_animal_ID();
+        //constr
+        Animal()
+        {
+            animal_count++;
+        }
+        virtual ~Animal()
+        {
+            animal_count--;
+        }
+        
+        //functions
+        virtual void update_draw() override;            //update of drawing rectangle pro
+        virtual void update_movement() override;         //update position x and y position
+        virtual void update_rotation() override;         
+        //getters
+        unsigned int get_animal_count(); //doesnt work properly with implemented dyn array of all animals
+        //unsigned int get_animal_ID();
 
-    //setters
+        //setters
 
-    //members
+        //members
     protected:
-    static unsigned int animal_count;
-    //unsigned int animal_ID {0};
-
-
-    //float health {50};
+        static unsigned int animal_count;
+        //std::size_t animal_ID {0};
 
 };
+
+class Plant : public LifeForm
+{
+    Plant()
+    {
+        plant_count++;
+    }
+    virtual ~Plant()
+    {
+        plant_count--;
+    }
+
+    static unsigned int plant_count;
+};
+
 
 #endif //LIFE_FORM_H
 

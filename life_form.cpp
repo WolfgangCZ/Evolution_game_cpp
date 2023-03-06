@@ -4,6 +4,9 @@
 #include "utilities.h"
 #include "life_form.h"
 
+unsigned int Animal::animal_count = 0;
+unsigned int Plant::plant_count = 0;
+
 void LifeForm::update_draw()
 {
     assert(true);
@@ -20,7 +23,7 @@ void LifeForm::update_rotation()
     std::cout << "assertion failed - not allowed to call lifeform class functions ";
 }
 
-unsigned int Animal::animal_count = 0;
+
 
 void Animal::update_draw()
 {
