@@ -18,6 +18,8 @@ class WorldPopulation
     ~WorldPopulation()
     {}
     std::vector<Animal> world_animals{};
+    //add all objects grid for calculating each distances x and y
+    //sort this grid for first time and then for each recalculation check for chanigng order
     void add_animal();
     void draw_animals(LifeForm *lf_pointer);
     void update_animals_movement(LifeForm *lf_pointer);

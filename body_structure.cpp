@@ -4,11 +4,11 @@
 
 Rectangle BodyStructure::get_rectangle()
 {
-    return Rectangle{position.x, position.y, size, size};
+    return Rectangle{position.x, position.y, m_size, m_size};
 }
 Rectangle BodyStructure::get_centered_rect()
 {
-    return Rectangle{get_centre_x(), get_centre_y(), size, size};
+    return Rectangle{get_centre_x(), get_centre_y(), m_size, m_size};
 }
 Vector2 BodyStructure::get_position()
 {
@@ -25,15 +25,15 @@ float BodyStructure::get_y()
 }
 Vector2 BodyStructure::get_centre_pos()
 {
-    return Vector2{position.x + size/2, position.y + size/2};
+    return Vector2{position.x + m_size/2, position.y + m_size/2};
 }
 float BodyStructure::get_centre_x()
 {
-    return position.x + size/2;
+    return position.x + m_size/2;
 }
 float BodyStructure::get_centre_y()
 {
-    return position.y + size/2;
+    return position.y + m_size/2;
 }
 
 void BodyStructure::set_x(float x)
@@ -47,11 +47,11 @@ void BodyStructure::set_y(float y)
 }
 void BodyStructure::set_centre_x (float x)
 {
-    position.x = x+size/2;
+    position.x = x+m_size/2;
 }
 void BodyStructure::set_centre_y (float y)
 {
-    position.y = y+size/2;
+    position.y = y+m_size/2;
 }
 
 void BodyStructure::add_x(float add_x)
@@ -65,11 +65,11 @@ void BodyStructure::add_y(float add_y)
 
 float BodyStructure::get_weight()
 {
-    return weight;
+    return m_weight;
 }
 float BodyStructure::get_size()
 {
-    return size;
+    return m_size;
 }
 
 Color BodyStructure::get_color()

@@ -1,6 +1,8 @@
 #ifndef BODY_STRUCTURE_H
 #define BODY_STRUCTURE_H
 #include "raylib.h"
+#include <cassert>
+#include <iostream>
 
 /*
 body structure defines all the physical objects on named animal, plant, resource or obstacle and dimensional properties (like position and rotation)
@@ -16,7 +18,13 @@ class BodyStructure
 {
         public:
         BodyStructure()
-        {}
+        {
+            if(m_weight == 0)
+            {
+                assert(true);
+                std::cout << "assertion failed - weight cannot be 0!!!" << std::endl;
+            }
+        }
         ~BodyStructure()
         {}
 
@@ -52,9 +60,9 @@ class BodyStructure
             static_cast<float>(GetRandomValue(0,GetScreenHeight())),
             static_cast<float>(GetRandomValue(0,GetScreenHeight()))
             };
-        float size {20};                //size of rectangle
+        float m_size {20};                //size of rectangle
         Color m_color{BLUE};            //color as object 
-        float weight = size*size;       //weight which is just area of rectangle
+        float m_weight = m_size*m_size;       //weight which is just area of rectangle
 };
 
 #endif //BODY_STRUCTURE_H

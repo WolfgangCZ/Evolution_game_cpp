@@ -24,11 +24,8 @@ class PlantAttr
         ~PlantAttr()
         {}
     private:
-        int move_strenght {50};
-        int rot_strenght {1};
         float health {100};
-        float age {0};
-        float energy {0};
+        float growth {100};
 };
 
 
