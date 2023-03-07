@@ -7,10 +7,10 @@
 /*
 body structure defines all the physical objects on named animal, plant, resource or obstacle and dimensional properties (like position and rotation)
 members:
-    - position = position x,y as vector2 
-    - size = one size of rectanhle (default 20)
-    - weight = area of rectangle
-    - color = color of rectangle (its gonna serve as classification of its purpose or characteristics in future)
+    - m_position = position x,y as vector2 
+    - m_size = one size of rectanhle (default 20)
+    - m_weight = area of rectangle
+    - m_color = color of rectangle (its gonna serve as classification of its purpose or characteristics in future)
 functions serve as movement and rotation tools and also as modifying these things (self explanatory)
 */
 
