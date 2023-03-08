@@ -8,11 +8,11 @@ class Test
     public:
     Test()
     {
-        std::cout << "1 constructor used" << std::endl;
+        //std::cout << "1 constructor used" << std::endl;
     }
     Test(const Test &tmp)
     {
-        std::cout << "2 copy constr used" << std::endl;
+        //std::cout << "2 copy constr used" << std::endl;
     }
     ~Test()
     {
@@ -38,26 +38,27 @@ class Test
 
 int main ()
 {
-    const std::size_t range {30};
+    const std::size_t range {3000};
     std::srand(time(0));
     int count {0};
     //std::shared_ptr<Test> ptr_test = std::make_shared<Test>(Test {});
     
 
 
-    std::vector <Test>class_array{};
-    std::vector <Test*>ptr_array{};
+    std::vector <Test> class_array{};
+    std::vector <Test*> ptr_array{};
+    std::vector <std::shared_ptr<Test>> shptr_array{};
     //fill up the array
     for(std::size_t i {0}; i<range; ++i)
     {
         class_array.push_back(Test{});
-        ptr_array.push_back(&class_array[i]);
+        shptr_array.push_back(std::make_shared<Test>(class_array[i]));
     }
 
     std::cout << "before sorting" << std::endl;
     for(std::size_t i {0}; i<range; ++i)
     {
-        ptr_array[i]->print();
+        shptr_array[i]->print();
     }
 
     int iter_count {0};
@@ -65,16 +66,17 @@ int main ()
     {
         iter_count++;
         Test *temp_ptr = nullptr;
+        std::shared_ptr<Test> temp_shptr;
         
         for(std::size_t i {1}; i<range; ++i)
         {
-            if(ptr_array[i]->get_x() <  ptr_array[i-1]->get_x())
+            if(shptr_array[i]->get_x() <  shptr_array[i-1]->get_x())
             {
-                temp_ptr = ptr_array[i];
-                ptr_array[i] = ptr_array[i-1];
-                ptr_array[i-1] = temp_ptr;
+                temp_shptr = shptr_array[i];
+                shptr_array[i] = shptr_array[i-1];
+                shptr_array[i-1] = temp_shptr;
                 count ++;
-                std::cout << "number of swaps: " << count << std::endl;
+                //std::cout << "number of swaps: " << count << std::endl;
             }
 
         }
@@ -85,7 +87,7 @@ int main ()
     
     for(std::size_t i {0}; i<range; ++i)
     {
-        ptr_array[i]->print();
+        shptr_array[i]->print();
     }
 
     //std::cout << "size of array: " << class_array.size() << std::endl;
