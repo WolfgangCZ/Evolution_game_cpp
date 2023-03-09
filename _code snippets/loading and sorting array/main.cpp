@@ -38,7 +38,7 @@ class Test
 
 int main ()
 {
-    const std::size_t range {3000};
+    const std::size_t range {300000};
     std::srand(time(0));
     int count {0};
     //std::shared_ptr<Test> ptr_test = std::make_shared<Test>(Test {});
@@ -58,7 +58,7 @@ int main ()
     std::cout << "before sorting" << std::endl;
     for(std::size_t i {0}; i<range; ++i)
     {
-        shptr_array[i]->print();
+        //shptr_array[i]->print();
     }
 
     int iter_count {0};
@@ -87,7 +87,7 @@ int main ()
     
     for(std::size_t i {0}; i<range; ++i)
     {
-        shptr_array[i]->print();
+        //shptr_array[i]->print();
     }
 
     //std::cout << "size of array: " << class_array.size() << std::endl;
