@@ -38,7 +38,7 @@ void Animal::update_draw()
 }
 void Animal::update_movement()
 {
-    structure.add_x(calculate_x_from_orto(physics.get_velocity(), physics.get_direction())); //minus because head down is +
+    structure.add_x(calculate_x_from_orto(physics.get_velocity(), physics.get_direction())); //minus because direction down is +
     structure.add_y(-(calculate_y_from_orto(physics.get_velocity(), physics.get_direction())));
 }
 

@@ -3,6 +3,7 @@
 #include<vector>
 #include<memory>
 
+/*
 class Test
 {
     public:
@@ -81,4 +82,26 @@ int main ()
     return 0;
 }
 
+*/
 
+
+int some_func(int a)
+{
+    std::cout << "inside function" << std::endl;
+    switch(a)
+    {
+        case 1 : return 10;
+        break;
+        case 2 : return 20;
+        break;
+        default : return 30;
+        break;
+    }
+}
+
+int main ()
+{
+    
+    std::cout << "some func result " << some_func(1);
+    return 0;
+}

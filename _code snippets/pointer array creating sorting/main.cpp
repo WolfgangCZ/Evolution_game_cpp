@@ -7,34 +7,42 @@
 class Test
 {
     public:
-    Test()
-    {
-        std::cout << "1 constructor used" << std::endl;
-    }
-    Test(const Test &tmp)
-    {
-        std::cout << "2 copy constr used" << std::endl;
-    }
-    ~Test()
-    {
-        std::cout << "3 destructor used" << std::endl;
-    }
-    void print()
-    {
-        std::cout << "x: " << m_x << " y: " << m_y << std::endl;
-    }
-    int get_x()
-    {
-        return m_x;
-    }
-    int get_y()
-    {
-        return m_y;
-    }
+        Test()
+        {
+            std::cout << "1 constructor used" << std::endl;
+        }
+        Test(const Test &tmp)
+        {
+            std::cout << "2 copy constr used" << std::endl;
+        }
+        ~Test()
+        {
+            std::cout << "3 destructor used" << std::endl;
+        }
+        void print()
+        {
+            std::cout << "x: " << m_x << " y: " << m_y << std::endl;
+        }
+        int get_x()
+        {
+            return m_x;
+        }
+        int get_y()
+        {
+            return m_y;
+        }
+        void set_x(int a)
+        {
+            m_x = a;
+        }
+        void set_y(int a)
+        {
+            m_y = a;
+        }
 
     private:
-    int m_x {std::rand()%100};
-    int m_y {std::rand()%100};
+        int m_x {std::rand()%100};
+        int m_y {std::rand()%100};
 };
 
 std::shared_ptr<Test> find_adress(std::vector<std::shared_ptr<Test>> &tmp, std::shared_ptr<Test> ptr)

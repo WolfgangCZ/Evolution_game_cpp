@@ -41,7 +41,7 @@ int main ()
     float forward_force {0};
     float rotation_force {0};
 
-//setting up camera
+    //setting up camera
     Vector2 camera_position {screen_width/2,screen_height/2};
 
     Camera2D camera {0};
