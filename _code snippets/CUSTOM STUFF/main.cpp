@@ -17,7 +17,7 @@ int main()
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "New window");
 
     DrawCustomGrid grid;
-    CustomMenu menu;
+    CustomFixedMenu menu;
 
 
     

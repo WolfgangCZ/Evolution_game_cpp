@@ -6,7 +6,7 @@
 #include <string>
 #include <vector>
 
-class CustomMenu
+class CustomFixedMenu
 {
     public:
         //set name for each tile
@@ -22,12 +22,12 @@ class CustomMenu
         float tile_overlap {20};
         float background_offset{20};
         float tile_offset {100};
-        float frame_offset {10};
+        float frame_offset {4};
 
         //measure text
 
         Color menu_col{RED};
-        Color menu_frame_col{MAROON};
+        Color menu_frame_col{GRAY};
 
         //position of left upper corner of whole menu
         float menu_x {50};
