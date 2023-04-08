@@ -9,29 +9,43 @@
 class CustomFixedMenu
 {
     public:
+
+        CustomFixedMenu();
+        ~CustomFixedMenu();
         //set name for each tile
-        void set_titles(unsigned int pos, std::string name);
-        void set_offset(unsigned int offset);
+        void set_title(std::string name);
+        void set_tiles_title(unsigned int pos, std::string name);
         void draw_menu();
+
+
+
 
     private:
         //basic mane for few tiles with same size
-        std::vector<std::string> titles {"TITLE 1", "TITLE 2", "TITLE 3"};
-        unsigned int button_pos {titles.size()};
-        float font_size {10};
-        float tile_overlap {20};
-        float background_offset{20};
-        float tile_offset {100};
+        std::string main_title {"MAIN MENU"};
+        std::vector<std::string> titles {"NEW GAME", "OPTIONS", "QUIT"};
+        float font_size {40};
+        float title_font_size {50};
+        float tile_overlap {10};
+        float menu_overlap {30};
+        float button_overlap {10};
+        float tiles_spacing{100};
         float frame_offset {4};
+        float menu_width {};
+        float menu_height {};
+        float title_width {};
 
         //measure text
 
-        Color menu_col{RED};
+        Color font_col {WHITE};
+        Color button_col{VIOLET};
+        Color button_frame_col{GRAY};
+        Color menu_col{BLUE};
         Color menu_frame_col{GRAY};
 
-        //position of left upper corner of whole menu
-        float menu_x {50};
-        float menu_y {50};
+        //position of center of the menu
+        float menu_x {400};
+        float menu_y {300};
 
         
 };
