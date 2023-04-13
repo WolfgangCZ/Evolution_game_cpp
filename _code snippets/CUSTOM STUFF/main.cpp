@@ -18,7 +18,7 @@ int main()
 
     DrawCustomGrid grid;
     CustomFixedMenu menu;
-    Button button;
+    Button button {"ZKOUSKA"};
 
 
     
@@ -34,9 +34,7 @@ int main()
         ClearBackground(BLACK);
         
         grid.draw_grid();
-        button.set_xy(250,250);
-        //menu.draw_menu();
-        button.draw_button();
+        menu.draw_menu();
 
         EndDrawing();
         //----------------------------------------------------------------------------------
