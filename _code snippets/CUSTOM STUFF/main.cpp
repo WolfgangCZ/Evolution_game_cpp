@@ -18,6 +18,7 @@ int main()
 
     DrawCustomGrid grid;
     CustomFixedMenu menu;
+    Button button;
 
 
     
@@ -33,8 +34,9 @@ int main()
         ClearBackground(BLACK);
         
         grid.draw_grid();
-        menu.draw_menu();
-
+        button.set_xy(250,250);
+        //menu.draw_menu();
+        button.draw_button();
 
         EndDrawing();
         //----------------------------------------------------------------------------------
