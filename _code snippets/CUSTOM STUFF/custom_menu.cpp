@@ -55,7 +55,7 @@ void CustomFixedMenu::draw_menu()
     for(std::size_t i {}; i< buttons.size(); i++)
     {
         buttons[i].pos_x = menu_x;
-        buttons[i].pos_y = menu_y - menu_y/2 + 2* menu_overlap + i*tiles_spacing /*+ MeasureText(main_title, title_font_size)*/;
+        buttons[i].pos_y = menu_y - menu_y/2 + 2* menu_overlap + i*tiles_spacing + MeasureText(main_title, title_font_size);
         buttons[i].draw_button();
     }
 }
