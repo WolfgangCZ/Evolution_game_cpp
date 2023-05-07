@@ -23,7 +23,7 @@ namespace EvoGame
             void set_button_title(std::size_t pos, const char *name);
             void SetMenuCenter(int screen_width, int screen_height);
             void draw_menu();
-
+            bool CheckButtonClick(int pos);
 
         private:
             //basic menu for few tiles with same size

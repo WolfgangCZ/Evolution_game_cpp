@@ -21,10 +21,14 @@ namespace EvoGame
         {
             ClearBackground(BLACK);
             //--------------------------APP LOOP-----------------------
-            CustomFixedMenu mainMenu;
-            mainMenu.SetMenuCenter(window_width, window_height);
-            mainMenu.draw_menu();
 
+                CustomFixedMenu mainMenu;
+                mainMenu.SetMenuCenter(window_width, window_height);
+                mainMenu.draw_menu();
+                if(!mainMenu.CheckButtonClick(0))
+                {
+                    
+                }
             //--------------------------APP LOOP-----------------------
             BeginDrawing();
             EndDrawing();

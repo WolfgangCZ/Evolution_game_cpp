@@ -71,4 +71,10 @@ namespace EvoGame
             buttons[i].draw_button();
         }
     }
+
+    bool CustomFixedMenu::CheckButtonClick(int pos)
+    {
+        return  buttons[pos].check_click();
+    }
+
 }; //namespace EvoGame
