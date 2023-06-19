@@ -16,7 +16,7 @@ int main ()
     using namespace EvoGame;
     MainAppLoop mainAppLoop;
     MainAppLoopTESTER mainAppLoopTESTER;
-    std::cout << "DONE! See ya ";
+    std::cout << "DONE! See you again later bro";
     return 0;
 }
 
