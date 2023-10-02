@@ -1,7 +1,7 @@
 #ifndef CUSTOM_MENU_H
 #define CUSTOM_MENU_H
 
-#include "raylib.h"
+#include "include/raylib.h"
 
 #include "Button.h"
 #include <string>
@@ -18,7 +18,7 @@ namespace EvoGame
             ~CustomFixedMenu();
             //set name for each tile
             void set_title(const char * name);
-            void set_button_title(unsigned int pos, std::string name);
+            void set_button_title(unsigned int pos, const char* name);
             
             void set_button_title(std::size_t pos, const char *name);
             void SetMenuCenter(int screen_width, int screen_height);

@@ -1,7 +1,7 @@
 #include <iostream>
 
 #include "MainAppLoopTESTER.h"
-#include "raylib.h"
+#include "./include/raylib.h"
 
 namespace EvoGame
 {

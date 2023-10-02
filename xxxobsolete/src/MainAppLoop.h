@@ -1,25 +1,25 @@
-#ifndef APPWINDOWTESTER_H
-#define APPWINDOWTESTER_H
+#ifndef APPWINDOW_H
+#define APPWINDOW_H
 
 
-#include "raylib.h"
+#include "./include/raylib.h"
 #include "CustomMenu.h"
 #include <iostream>
 
 namespace EvoGame
 {
-    class MainAppLoopTESTER
+    class MainAppLoop
     {
     private:
         int window_width = 800;
         int window_height = 600;
-        const char *game_title = "TESTER";
+        const char *game_title = "EVOLUTION GAME";
         int fps = 60;
 
     public:
-        MainAppLoopTESTER();
+        MainAppLoop();
 
-        ~MainAppLoopTESTER();
+        ~MainAppLoop();
 
         void Loop();
 
