@@ -56,6 +56,7 @@
 		"typeinfo": "cpp",
 		"cstring": "cpp",
 		"ctime": "cpp",
-		"world_actions": "c"
+		"world_actions": "c",
+		"optional": "cpp"
 	}
 }
