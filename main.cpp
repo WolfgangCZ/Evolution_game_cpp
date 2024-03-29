@@ -18,7 +18,6 @@ class Organism
 {
     public:
         virtual void update() = 0; 
-        virtual void move_body() = 0;
 };
 
 class Plant : public Organism
@@ -47,8 +46,6 @@ class Plant : public Organism
         {
             DrawRectangleRec(body, color);
         }
-        void move_body()
-        {}
 };
 
 class Animal : public Organism
@@ -77,25 +74,58 @@ class Animal : public Organism
         {}
         virtual void update() override
         {
-            draw_animal();
+            drawAnimal();
         }
-        void draw_animal()
+        void drawAnimal()
         {
             DrawRectanglePro(body, Vector2{0, 0}, dir_deg, color);
         }
-        void move_body()
-        {}
+        void moveBody(const float &force, const float &rotation)
+        {
+
+        }
 };
+
+class Population
+{
+    private:
+        std::vector<std::shared_ptr<Organism>> population;
+    public:
+        Population(){}
+        ~Population(){}
+        void addAnimal( std::shared_ptr<Animal> new_animal )
+        {
+            population.push_back( new_animal );
+        }
+        void addPlant( std::shared_ptr<Plant> new_plant )
+        {
+            population.push_back(new_plant);
+        }
+        void update()
+        {
+            for(size_t i = 0; i < population.size(); i++)
+            {
+                population[i]->update();
+            }
+        }
+        std::vector<std::shared_ptr<Organism>> get_population()
+        {
+            return population;
+        }
+};
+
 
 class PlayerHandle
 {
-    PlayerHandle(std::shared_ptr<Animal> player_animal)
-    {
-        
-    }
-    void MovePlayer(Vector2 direction)
-    {
-    }
+    private:
+        std::shared_ptr<Animal> player_animal;
+    public:
+        PlayerHandle(std::shared_ptr<Animal> player_animal)
+        {}
+        void MovePlayer(Vector2 direction)
+        {
+            player_animal->moveBody(direction);
+        }
 };
 
 int main ()
@@ -103,32 +133,28 @@ int main ()
     InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "DEBUG EVOGAME");
     SetTargetFPS(FPS);
     float dt = 0;
-    std::vector<std::shared_ptr<Organism>> population;
-    std::shared_ptr<Organism> new_organism;
+    Population population;
+    std::shared_ptr<Animal> player_animal = std::make_shared<Animal>(Animal{});
+    population.addAnimal(player_animal);
 
-    while(!WindowShouldClose())
+    while ( !WindowShouldClose() )
     {
         BeginDrawing();
         dt += GetFrameTime();
-        if(IsKeyPressed(KEY_C))
+        // abstract it to a class
+        if ( IsKeyPressed(KEY_C) )
         {
             std::cout << "adding plant" << std::endl;
-            new_organism = std::make_shared<Plant>(Plant{});
-            population.push_back(new_organism);
-            std::cout << "there is " << population.size() << " population now" << std::endl;
+            population.addAnimal( std::make_shared<Animal>(Animal{}) );
+            std::cout << "there is " << population.get_population().size() << " population now" << std::endl;
         }
         if(IsKeyPressed(KEY_D))
         {
             std::cout << "adding animal" << std::endl;
-            new_organism = std::make_shared<Animal>(Animal{});;
-            population.push_back(new_organism);
-            std::cout << "there is " << population.size() << " population now" << std::endl;
+            population.addPlant( std::make_shared<Plant>(Plant{}) );
+            std::cout << "there is " << population.get_population().size() << " population now" << std::endl;
         }
-
-        for(size_t i = 0; i<population.size(); i++)
-        {
-            population[i]->update();
-        }
+        population.update();
         EndDrawing();
     }
     CloseWindow();
