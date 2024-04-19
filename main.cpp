@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <cmath>
 #include <cstring>
 #include <ctime>
 #include <vector>
@@ -80,9 +81,12 @@ class Animal : public Organism
         {
             DrawRectanglePro(body, Vector2{0, 0}, dir_deg, color);
         }
+        // TODO create velocity (as Vector2) and angular velocity
         void moveBody(const float &force, const float &rotation)
         {
-
+            dir_deg += rotation;
+            body.x += force * std::cos(dir_deg);
+            body.y += force * std::sin(dir_deg);
         }
 };
 
