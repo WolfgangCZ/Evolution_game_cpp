@@ -17,7 +17,6 @@ class Animal : public Organism
 
         Vector2 m_direction = Vector2{0.0f,1.0f};
 
-        float m_rot_angle = std::atan2(m_direction.y, m_direction.x);
         float m_velocity = 0;
         float m_rot_velocity = 0;
 
@@ -41,5 +40,6 @@ class Animal : public Organism
         Vector2 get_position();
         float get_velocity();
         float get_rot_angle();
-
+        float get_size();
+        Rectangle get_body();
 };

@@ -14,11 +14,11 @@ class Population
     public:
         Population(){}
         ~Population(){}
-        void AddAnimal( std::shared_ptr<Animal> new_animal )
+        void add_animal( std::shared_ptr<Animal> new_animal )
         {
             population.push_back( new_animal );
         }
-        void AddPlant( std::shared_ptr<Plant> new_plant )
+        void add_plant( std::shared_ptr<Plant> new_plant )
         {
             population.push_back(new_plant);
         }
