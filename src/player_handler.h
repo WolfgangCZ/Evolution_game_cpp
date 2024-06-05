@@ -2,6 +2,8 @@
 
 #include <memory>
 #include "animal.h"
+#include "raylib.h"
+#include "raylib_draw_extension.h"
 
 // attach to animal to control it
 class PlayerHandler
@@ -28,12 +30,12 @@ class PlayerHandler
         void draw_select()
         {
             Rectangle rect = m_player_animal->get_body();
-            size = rect.height
-            rect.x -= size / 2;
-            rect.y -= size / 2;
-            rect.width *= 2;
-            rect.height *= 2;
-            DrawRectangleLinesEx(rect, 1, WHITE);
+            float size = rect.height;
+            rect.x -= size;
+            rect.y -= size;
+            rect.width = 2*size;
+            rect.height = 2*size;
+            DrawRectCorners(rect, 1, rect.width/4, WHITE);
         }
         void attach_to_animal(const std::shared_ptr<Animal>& animal)
         {

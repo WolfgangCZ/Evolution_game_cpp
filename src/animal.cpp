@@ -10,6 +10,7 @@
 
 Animal::Animal() : 
     m_body{Rectangle{RAND_WIN_POS_X, RAND_WIN_POS_Y, ANIMAL_SIZE, ANIMAL_SIZE}}
+    // create delegating constructors
 {
     m_direction = Vector2(RAND_0_1_FLOAT, RAND_0_1_FLOAT);
     m_mass = m_body.height * m_body.width;

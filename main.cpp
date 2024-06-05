@@ -45,11 +45,13 @@ int main ()
 
         dt += GetFrameTime();
 
+        keyboard_handler.set_debug_mode();
         keyboard_handler.move(player_handler, key_force, rot_force);
 
         Vector2 player_position = player_animal->get_position();
         float player_velocity = player_animal->get_velocity();
         float player_rot_angle = player_animal->get_rot_angle() * RAD2DEG;
+
 
         if (debug_mode)
         {
