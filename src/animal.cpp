@@ -5,7 +5,7 @@
 
 #define RAND_WIN_POS_X static_cast<float>(GetRandomValue(0, WINDOW_WIDTH))
 #define RAND_WIN_POS_Y static_cast<float>(GetRandomValue(0, WINDOW_HEIGHT))
-#define RAND_0_1_FLOAT static_cast<float>(GetRandomValue(0, 1))
+#define RAND_0_1_FLOAT static_cast<float>(GetRandomValue(1, 10000)/10000.0f)
 
 
 Animal::Animal() : 
@@ -83,5 +83,5 @@ float Animal::get_size()
 }
 Rectangle Animal::get_body()
 {
-    return m_body;
+    return Rectangle{m_body.x - m_body.width / 2, m_body.y - m_body.height / 2, m_body.width, m_body.height};
 }

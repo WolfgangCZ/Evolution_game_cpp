@@ -4,12 +4,13 @@
 
 #include "raylib.h"
 #include "player_handler.h"
+#include "animal_buffer.h"
 
 
 class KeyboardHandler
 {
     public:
-        void move(PlayerHandler &player, const float &key_force, const float &rot_force)
+        void move(AnimalHandler &player, const float &key_force, const float &rot_force)
         {
             if ( IsKeyDown(KEY_UP) )
             {
@@ -28,14 +29,17 @@ class KeyboardHandler
                 player.rotate_player(rot_force);
             }
         }
-        // if ( IsKeyPressed(KEY_C) )
-        // {
-        //     population.add_animal( std::make_shared<Animal>(Animal{}) );
-        // }
-        // if(IsKeyPressed(KEY_D))
-        // {
-        //     population.add_plant( std::make_shared<Plant>(Plant{}) );
-        // }
+        void others(AnimalBuffer &population)
+        {
+            if ( IsKeyPressed(KEY_C) )
+            {
+                population.add_animal();
+            }
+            // if(IsKeyPressed(KEY_D))
+            // {
+            //     population.add_plant();
+            // }
+        }
         void set_debug_mode()
         {
             if (IsKeyPressed(KEY_F3))
