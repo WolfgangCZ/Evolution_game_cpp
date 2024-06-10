@@ -57,6 +57,10 @@
 		"cstring": "cpp",
 		"ctime": "cpp",
 		"world_actions": "c",
-		"optional": "cpp"
+		"optional": "cpp",
+		"charconv": "cpp",
+		"format": "cpp",
+		"span": "cpp",
+		"variant": "cpp"
 	}
 }

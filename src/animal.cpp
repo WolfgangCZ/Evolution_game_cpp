@@ -5,7 +5,7 @@
 
 #define RAND_WIN_POS_X static_cast<float>(GetRandomValue(0, WINDOW_WIDTH))
 #define RAND_WIN_POS_Y static_cast<float>(GetRandomValue(0, WINDOW_HEIGHT))
-#define RAND_0_1_FLOAT static_cast<float>(GetRandomValue(1, 10000)/10000.0f)
+#define RAND_0_1_FLOAT static_cast<float>(GetRandomValue(1, 100)/100.0f)
 
 
 Animal::Animal() : 

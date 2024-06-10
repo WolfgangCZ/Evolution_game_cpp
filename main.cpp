@@ -20,6 +20,11 @@
 
 #define DEBUG 1
 
+// steps to implement
+// 1. add animal vision
+// 2. add autonomous movement
+
+
 int main ()
 {
     InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "DEBUG EVOGAME");

@@ -14,7 +14,7 @@ class AnimalBuffer : public OrganismBuffer
         std::vector<std::shared_ptr<Animal>> animals;
     public:
         AnimalBuffer(){}
-        void set_animal(std::shared_ptr<Animal> animal)
+        void set_animal(const std::shared_ptr<Animal> &animal)
         {
             animals.push_back(animal);
         }

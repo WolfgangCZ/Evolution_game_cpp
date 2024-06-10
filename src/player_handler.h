@@ -12,7 +12,7 @@ class AnimalHandler
         std::shared_ptr<Animal> m_selected_animal;
     public:
         AnimalHandler(){}
-        AnimalHandler(std::shared_ptr<Animal> player_animal)
+        AnimalHandler(const std::shared_ptr<Animal> &player_animal)
         {
             this->m_selected_animal = player_animal;
         }
@@ -40,7 +40,7 @@ class AnimalHandler
             rect.height = 2*size;
             DrawRectCorners(rect, 1, rect.width/4, WHITE);
         }
-        void attach_to_animal(std::shared_ptr<Animal> animal)
+        void attach_to_animal(const std::shared_ptr<Animal> &animal)
         {
             this->m_selected_animal = animal;
         }
