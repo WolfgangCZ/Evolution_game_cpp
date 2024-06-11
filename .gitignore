@@ -1,4 +1,77 @@
+# Compiled object files
+*.o
+*.obj
+
+# Compiled static libraries
+*.lib
+*.a
+
+# Compiled dynamic libraries
+*.dll
+*.so
+*.dylib
+
+# Executable files
 *.exe
-*.dsym
-main
-.vscode
+*.out
+*.app
+
+# Debug files
+*.dSYM/
+*.pdb
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+
+# IDE files (Visual Studio, CLion, etc.)
+*.idea/
+*.vs/
+.vscode/
+
+# Backup files
+*~
+*.bak
+
+# Generated files
+*.gch
+*.pch
+*.d
+
+# CMake files
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+
+# Codeblocks
+*.depend
+*.layout
+*.layout.*
+*.cbp
+
+# Qt Creator
+*.pro.user
+*.moc
+*.qrc
+*.ui
+
+# Conan (C++ package manager)
+conanbuildinfo.txt
+conanbuildinfo.cmake
+conaninfo.txt
+graph_info.json
+
+# Build directories
+build/
+Build/
+dist/
+bin/
+obj/
+Debug/
+Release/
+
+# Custom directories or files
+custom_directory/
+custom_file.ext
