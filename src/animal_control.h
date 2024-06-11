@@ -43,7 +43,7 @@ class AnimalControl
         {
             this->m_selected_animal = nullptr;
         }
-        std::shared_ptr<Animal> get_animal()
+        std::shared_ptr<Animal> &get_animal()
         {
             return m_selected_animal;
         }
