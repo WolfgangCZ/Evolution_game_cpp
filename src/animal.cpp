@@ -5,21 +5,19 @@
 
 #define RAND_WIN_POS_X static_cast<float>(GetRandomValue(0, WINDOW_WIDTH))
 #define RAND_WIN_POS_Y static_cast<float>(GetRandomValue(0, WINDOW_HEIGHT))
-#define RAND_0_1_FLOAT static_cast<float>(GetRandomValue(1, 100)/100.0f)
+#define RAND_0_1_FLOAT static_cast<float>(GetRandomValue(1, 100) / 100.0f)
+#define RAND_0_2RAD_FLOAT static_cast<float>(GetRandomValue(0, 360) * DEG2RAD)
 
 
-Animal::Animal() : 
-    m_body{Rectangle{RAND_WIN_POS_X, RAND_WIN_POS_Y, ANIMAL_SIZE, ANIMAL_SIZE}}
-    // create delegating constructors
+//create animal with position, rotation and default size
+Animal::Animal() : Animal(RAND_WIN_POS_X, RAND_WIN_POS_Y, RAND_0_2RAD_FLOAT, ANIMAL_SIZE)
 {
-    m_direction = Vector2(RAND_0_1_FLOAT, RAND_0_1_FLOAT);
-    m_mass = m_body.height * m_body.width;
 }
 
-Animal::Animal(float x, float y, float rotation, float size) : 
-    m_body{Rectangle{x,y,size,size}}
+Animal::Animal(float x, float y, float rotation, float size) : m_body{Rectangle{x,y,size,size}}
 {
-    m_direction = Vector2Rotate(Vector2{1, 0}, rotation);
+    m_movement_dir = Vector2Rotate(Vector2{0, 1}, rotation);
+    m_face_dir = m_movement_dir;
     m_mass = m_body.height * m_body.width;
 }
 void Animal::update()
@@ -31,37 +29,47 @@ void Animal::update()
 }
 void Animal::update_position()
 {
-    m_body.x += m_velocity * m_direction.x;
-    m_body.y += m_velocity * m_direction.y;
+    m_body.x += m_velocity * m_movement_dir.x;
+    m_body.y += m_velocity * m_movement_dir.y;
 }
 void Animal::update_direction()
 {
-    m_direction = Vector2Rotate(m_direction, m_rot_velocity);
-    m_direction = Vector2Normalize(m_direction);
+    m_face_dir = Vector2Rotate(m_face_dir, m_rot_velocity);
+    m_face_dir = Vector2Normalize(m_face_dir);
 }
 void Animal::apply_friction()
 {
     m_velocity *= animal_friction;
     m_rot_velocity *= animal_friction;
 }
-
+void Animal::move_forward()
+{
+    move(m_mov_strenght);
+}
+void Animal::move_backward()
+{
+    move(-m_mov_strenght);
+}
+void Animal::turn_right()
+{
+    turn(m_rot_strenght);
+}
+void Animal::turn_left()
+{
+    turn(-m_rot_strenght);
+}
 void Animal::draw_animal()
 {
     DrawRectanglePro(
         m_body, 
         Vector2{m_body.width / 2, m_body.height / 2}, 
-        Vector2Angle(m_direction, Vector2Zero()) * RAD2DEG, 
+        Vector2Angle(m_face_dir, Vector2Zero()) * RAD2DEG, 
         m_color
         );
 }
-void Animal::modify_velocity(float force)
+Vector2 Animal::get_face_dir()
 {
-    m_velocity += force / m_mass; 
-}
-
-void Animal::modify_rot_velocity(float rot_force)
-{
-    m_rot_velocity += rot_force / m_mass;
+    return m_face_dir;
 }
 Vector2 Animal::get_position()
 {
@@ -74,7 +82,7 @@ float Animal::get_velocity()
 //in radians
 float Animal::get_rot_angle()
 {
-    return Vector2Angle(m_direction, Vector2Zero());
+    return Vector2Angle(m_movement_dir, Vector2Zero());
 }
 // side length (animal is always square)
 float Animal::get_size()
@@ -84,4 +92,16 @@ float Animal::get_size()
 Rectangle Animal::get_body()
 {
     return Rectangle{m_body.x - m_body.width / 2, m_body.y - m_body.height / 2, m_body.width, m_body.height};
+}
+void Animal::move(float force)
+{
+    Vector2 applied_force_vec = Vector2Scale(m_face_dir, force / m_mass);
+    Vector2 movement_force_vec = Vector2Scale(m_movement_dir, m_velocity);
+    movement_force_vec = Vector2Add(movement_force_vec, applied_force_vec);
+    m_movement_dir = Vector2Normalize(movement_force_vec);
+    m_velocity = Vector2Length(movement_force_vec);
+}
+void Animal::turn(float force)
+{
+    m_rot_velocity += force / m_mass;
 }

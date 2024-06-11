@@ -15,15 +15,16 @@
 #include "src/keyboard.h"
 #include "src/basic_settings.h"
 #include "src/plant.h"
-#include "src/player_handler.h"
+#include "src/animal_control.h"
 #include "src/animal_buffer.h"
 
 #define DEBUG 1
 
 // steps to implement
-// 1. add animal vision
+// 0. rework movement DONE
+// 1. add animal vision 
 // 2. add autonomous movement
-
+// 3. add collision
 
 int main ()
 {
@@ -34,11 +35,8 @@ int main ()
 
     AnimalBuffer all_animals;
 
-    AnimalHandler animal_handler = AnimalHandler();
+    AnimalControl animal_handler = AnimalControl();
     KeyboardHandler keyboard_handler = KeyboardHandler(); 
-
-    float key_force = 20;
-    float rot_force = 1;
 
     Vector2 center = {WINDOW_WIDTH/2, WINDOW_HEIGHT/2};
 
@@ -50,6 +48,7 @@ int main ()
 
         std::cout << "check2" << std::endl;
         Vector2 mouse_pos = GetMousePosition();
+        // mouse selector - move to other class
         for (size_t i = 0; i < all_animals.get_population().size(); i++)
         {
             std::shared_ptr<Animal> selected = all_animals.get_population()[i];
@@ -61,12 +60,10 @@ int main ()
             }
         }
 
-
         dt += GetFrameTime();
 
         std::cout << "check3" << std::endl;
         keyboard_handler.set_debug_mode();
-        keyboard_handler.move(animal_handler, key_force, rot_force);
         keyboard_handler.others(all_animals);
 
         std::cout << "check4" << std::endl;

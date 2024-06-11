@@ -7,7 +7,7 @@
 #include "raylib.h"
 #include "game_state.h"
 
-enum KeyboardEvent
+enum UserInputEvent
 {
     EVENT_KEY_UP,
     EVENT_KEY_DOWN,
@@ -20,12 +20,11 @@ enum KeyboardEvent
 
 class EventListener
 {
+    private:
+        std::deque<UserInputEvent> m_keyboard_events;
 
     public:
-        EventListener(const GameStateHandler &game_state_handler)
-            : m_game_state_handler(game_state_handler)
-        {}
-    private:
-        std::deque<KeyboardEvent> m_keyboard_events;
-        const GameStateHandler &m_game_state_handler;
+        EventListener()
+        {
+        }
 };

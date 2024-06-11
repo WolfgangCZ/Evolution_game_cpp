@@ -43,6 +43,9 @@ $(OBJ_DIR):
 $(BIN_DIR):
 	mkdir -p $(BIN_DIR)
 
+test:
+	g++ -o test test.cpp -std=c++20
+
 # Clean rule
 clean:
 	rm -rf $(OBJ_DIR) $(BIN_DIR)

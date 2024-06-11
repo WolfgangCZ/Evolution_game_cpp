@@ -3,32 +3,13 @@
 #include <memory>
 
 #include "raylib.h"
-#include "player_handler.h"
+#include "animal_control.h"
 #include "animal_buffer.h"
 
 
 class KeyboardHandler
 {
     public:
-        void move(AnimalHandler &player, const float &key_force, const float &rot_force)
-        {
-            if ( IsKeyDown(KEY_UP) )
-            {
-                player.move_player(key_force);
-            }
-            if ( IsKeyDown(KEY_DOWN) )
-            {
-                player.move_player(-key_force);
-            }
-            if ( IsKeyDown(KEY_LEFT) )
-            {
-                player.rotate_player(-rot_force);
-            }
-            if ( IsKeyDown(KEY_RIGHT) )
-            {
-                player.rotate_player(rot_force);
-            }
-        }
         void others(AnimalBuffer &population)
         {
             if ( IsKeyPressed(KEY_C) )
