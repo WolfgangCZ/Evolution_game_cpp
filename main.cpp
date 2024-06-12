@@ -41,57 +41,24 @@ int main ()
     KeyboardHandler keyboard_handler = KeyboardHandler(); 
     DebugMode debug_mode = DebugMode();
 
-    Vector2 center = {WINDOW_WIDTH/2, WINDOW_HEIGHT/2};
-
     while ( !WindowShouldClose() )
     {
-        std::cout << "check1" << std::endl;
         BeginDrawing();
         ClearBackground(BLACK);
+
+        dt += GetFrameTime();
 
         debug_mode.activate();
         debug_mode.show_player_info(player_control);
         debug_mode.show_population_info(all_animals);
         debug_mode.show_geometry(player_control);
 
-        std::cout << "check2" << std::endl;
-        Vector2 mouse_pos = GetMousePosition();
-        // mouse selector - move to other class
-        for (size_t i = 0; i < all_animals.get_population().size(); i++)
-        {
-            std::shared_ptr<Animal> selected = all_animals.get_population()[i];
-            Rectangle body = selected->get_body();
-            if ( CheckCollisionPointRec(mouse_pos, body) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON) )
-            {
-                player_control.detach_from_animal();
-                player_control.attach_to_animal(selected);
-            }
-        }
-
-        dt += GetFrameTime();
-
-        std::cout << "check3" << std::endl;
-        keyboard_handler.others(all_animals);
-
-        std::cout << "check4" << std::endl;
-
-        Vector2 player_position = Vector2Zero();
-        float player_velocity = 0;
-        float player_rot_angle = 0;
-        std::cout << "check5" << std::endl;
-        if (player_control.get_animal() != nullptr)
-        {
-            player_position = player_control.get_animal()->get_position();
-            player_velocity = player_control.get_animal()->get_velocity();
-            player_rot_angle = player_control.get_animal()->get_rot_angle() * RAD2DEG;
-        }
-        std::cout << "check7" << std::endl;
-
-        std::cout << "check8" << std::endl;
+        keyboard_handler.add_animal(all_animals);
         all_animals.update();
-        std::cout << "check9" << std::endl;
+
+        player_control.select_player(all_animals);
         player_control.update();
-        std::cout << "check10" << std::endl;
+
         EndDrawing();
     }
     CloseWindow();

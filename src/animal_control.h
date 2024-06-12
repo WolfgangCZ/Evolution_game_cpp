@@ -107,4 +107,22 @@ class AnimalControl
                 }
             }
         }
+        void select_player(AnimalBuffer &all_animals)
+        {
+            if ( IsMouseButtonPressed(MOUSE_LEFT_BUTTON) )
+            {
+                Vector2 mouse_pos = GetMousePosition();
+                for (size_t i = 0; i < all_animals.get_population().size(); i++)
+                {
+                    std::shared_ptr<Animal> selected = all_animals.get_population()[i];
+                    Rectangle body = selected->get_body();
+                    if ( CheckCollisionPointRec(mouse_pos, body) )
+                    {
+                        detach_from_animal();
+                        attach_to_animal(selected);
+                        break;
+                    }
+                }
+            }
+        }
 };

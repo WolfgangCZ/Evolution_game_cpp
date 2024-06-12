@@ -10,7 +10,7 @@
 class KeyboardHandler
 {
     public:
-        void others(AnimalBuffer &population)
+        void add_animal(AnimalBuffer &population)
         {
             if ( IsKeyPressed(KEY_C) )
             {
