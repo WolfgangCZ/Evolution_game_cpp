@@ -9,6 +9,10 @@ class DebugMode
 {
     public:
         // by pressing F3 the debug mode will be toggled
+        DebugMode(Animal &player_control, AnimalBuffer &animal_buffer) :
+        {
+            
+        }
         void activate()
         {
             if (IsKeyPressed(KEY_F3))
@@ -38,6 +42,14 @@ class DebugMode
         {
             if (!m_debug_mode) return;
             DrawText(_int_label("Animals", (int)population.get_population().size()).c_str(), left_pad, _grab_new_line(), m_text_size, WHITE);
+        }
+        void show_vision(Animal &animal, AnimalBuffer &population)
+        {
+
+        }
+        void show_grid()
+        {
+
         }
         void show_geometry(AnimalControl &player_control)
         {

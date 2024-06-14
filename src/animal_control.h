@@ -5,6 +5,7 @@
 #include "raylib.h"
 #include "raylib_draw_extension.h"
 #include "game_state.h"
+#include "animal_buffer.h"
 
 // attach to animal to control it
 class AnimalControl

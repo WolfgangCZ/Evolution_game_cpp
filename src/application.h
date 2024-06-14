@@ -1,0 +1,72 @@
+#pragma once
+
+#include <iostream>
+#include <format>
+#include <string>
+#include <cmath>
+#include <cstring>
+#include <ctime>
+#include <vector>
+#include <memory>
+
+#include "include/raylib.h"
+#include "include/raymath.h"
+
+#include "src/organism.h"
+#include "src/animal.h"
+#include "src/keyboard.h"
+#include "src/basic_settings.h"
+#include "src/plant.h"
+#include "src/animal_control.h"
+#include "src/animal_buffer.h"
+#include "src/debug_mode.h"
+
+#define DEBUG 1
+/*
+steps to implement:
+DONE 0. rework movement
+- add debug class
+- add animal vision 
+- add autonomous movement
+- add collision
+*/
+class Application
+{
+
+    public:
+        AnimalBuffer all_animals;
+        AnimalControl animal_control = AnimalControl();
+        KeyboardHandler keyboard_handler = KeyboardHandler(); 
+        DebugMode debug_mode = DebugMode();
+    void run()
+    {
+        InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "DEBUG EVOGAME");
+        SetTargetFPS(FPS);
+        float time = 0;
+
+        while ( !WindowShouldClose() )
+        {
+            BeginDrawing();
+            ClearBackground(BLACK);
+
+            time += GetFrameTime();
+
+            debug_mode.activate();
+            debug_mode.show_player_info(animal_control);
+            debug_mode.show_population_info(all_animals);
+            debug_mode.show_geometry(animal_control);
+
+            keyboard_handler.add_animal(all_animals);
+            all_animals.update();
+
+            animal_control.select_player(all_animals);
+            animal_control.update();
+
+            EndDrawing();
+        }
+    }
+    void ~Application()
+    {
+        CloseWindow();
+    }
+};

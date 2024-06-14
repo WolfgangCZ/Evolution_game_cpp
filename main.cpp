@@ -36,8 +36,7 @@ int main ()
     float dt = 0;
 
     AnimalBuffer all_animals;
-
-    AnimalControl player_control = AnimalControl();
+    AnimalControl animal_control = AnimalControl();
     KeyboardHandler keyboard_handler = KeyboardHandler(); 
     DebugMode debug_mode = DebugMode();
 
@@ -49,15 +48,15 @@ int main ()
         dt += GetFrameTime();
 
         debug_mode.activate();
-        debug_mode.show_player_info(player_control);
+        debug_mode.show_player_info(animal_control);
         debug_mode.show_population_info(all_animals);
-        debug_mode.show_geometry(player_control);
+        debug_mode.show_geometry(animal_control);
 
         keyboard_handler.add_animal(all_animals);
         all_animals.update();
 
-        player_control.select_player(all_animals);
-        player_control.update();
+        animal_control.select_player(all_animals);
+        animal_control.update();
 
         EndDrawing();
     }
