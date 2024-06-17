@@ -21,6 +21,7 @@
 
 #define DEBUG 1
 /*
+
 steps to implement:
 DONE 0. rework movement
 - add debug class
