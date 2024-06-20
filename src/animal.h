@@ -8,7 +8,7 @@
 #include "entity.h"
 #include "raylib.h"
 #include "basic_settings.h"
-#include "game_state.h"
+#include "game_state_manager.h"
 #include "event_listener.h"
 
 

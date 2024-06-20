@@ -13,7 +13,8 @@ class EntityManager
         void remove_entity(const std::shared_ptr<Animal> &animal);
         void update();
 
-        std::vector<std::shared_ptr<Entity>> get_all_entities();
+        std::vector<std::shared_ptr<Entity>> &get_all_entities();
+        const std::vector<std::shared_ptr<Entity>> &get_all_entities() const;
 
     private:
         std::vector<std::shared_ptr<Entity>> entities;
@@ -45,7 +46,11 @@ void EntityManager::update()
         entities[i]->update();
     }
 }
-std::vector<std::shared_ptr<Entity>> EntityManager::get_all_entities()
+std::vector<std::shared_ptr<Entity>> &EntityManager::get_all_entities()
+{
+    return entities;
+}
+const std::vector<std::shared_ptr<Entity>> &EntityManager::get_all_entities() const
 {
     return entities;
 }

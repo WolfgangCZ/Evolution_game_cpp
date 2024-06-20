@@ -12,24 +12,25 @@ enum class GameState
 class GameStateManager
 {
     public:
-        void set_game_state(GameState &state)
-        {
-            game_state = state;
-        }
-        GameState get_game_state()
-        {
-            return game_state;
-        }
+        const GameState &get_game_state() const;
+        GameState &get_game_state();
+        void set_game_state(GameState state);
 
     private:
         GameState game_state = GameState::GAME_STATE_PLAYING;
 };
 
-GameState GameStateManager::get_game_state()
+const GameState &GameStateManager::get_game_state() const
 {
     return game_state;
 }
-void GameStateManager::set_game_state(GameState &state)
+GameState &GameStateManager::get_game_state()
+{
+    return game_state;
+}
+
+void GameStateManager::set_game_state(GameState state)
 {
     game_state = state;
 }
+

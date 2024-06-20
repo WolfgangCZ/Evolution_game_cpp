@@ -5,7 +5,7 @@
 
 #include "animal.h"
 #include "raylib.h"
-#include "game_state.h"
+#include "game_state_manager.h"
 
 enum UserInputEvent
 {
