@@ -5,14 +5,14 @@
 #include <unordered_map>
 #include <functional>
 
+#include "entity.h"
 #include "raylib.h"
-#include "organism.h" 
 #include "basic_settings.h"
 #include "game_state.h"
 #include "event_listener.h"
 
 
-class Animal : public Organism
+class Animal : public Entity
 {
     //structure 
     //physical attributes 

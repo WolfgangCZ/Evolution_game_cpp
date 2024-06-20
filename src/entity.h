@@ -1,6 +1,6 @@
 #pragma once
 
-class Organism
+class Entity
 {
     public:
         virtual void update() = 0; 
