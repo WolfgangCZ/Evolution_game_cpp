@@ -105,3 +105,7 @@ void Animal::turn(float force)
 {
     m_rot_velocity += force / m_mass;
 }
+bool is_playable()
+{
+    return true;
+}

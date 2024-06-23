@@ -91,13 +91,14 @@ void PlayerControl::select_player()
 
     Vector2 mouse_pos = GetMousePosition();
     // rework get all animals
-    for (const std::vector<std::shared_ptr<Entity>>& animal : m_entity_manager.get_all_entities())
+    std::vector<std::shared_ptr<Entity>> entities = m_entity_manager.get_all_entities();
+    for (size_t i = 0; i < m_entity_manager.get_all_entities().size(); i++)
     {
-        const Rectangle& body = animal->get_body();
-        if (CheckCollisionPointRec(mouse_pos, body))
+        Rectangle& body = entities[i]->get_body();
+        if (CheckCollisionPointRec(mouse_pos, body) && m_selected_animal->is_playable())
         {
             detach_from_animal();
-            attach_to_animal(animal);
+            attach_to_animal(entities[i]);
             break;
         }
     }

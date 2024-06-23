@@ -54,3 +54,8 @@ const std::vector<std::shared_ptr<Entity>> &EntityManager::get_all_entities() co
 {
     return entities;
 }
+// create more buffers and wire them together
+// main buffer for all entities
+// buffer for only animals
+// buffer for only plants
+// etc

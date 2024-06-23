@@ -37,6 +37,7 @@ class Animal : public Entity
         float get_rot_angle();
         float get_size();
         Rectangle get_body();
+        bool is_playable();
 
     private:
         Rectangle m_body = Rectangle{0.0f,0.0f,0.0f,0.0f};
