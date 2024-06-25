@@ -11,14 +11,14 @@
 class PlayerControl
 {
     private:
-        const EntityManager &m_entity_manager;
-        const GameStateManager &m_game_state_manager;
+        EntityManager *m_entity_manager;
+        GameStateManager *m_game_state_manager;
         std::shared_ptr<Animal> m_selected_animal;
     public:
-        PlayerControl(const EntityManager &entity_manager, const GameStateManager &game_state_manager);
+        PlayerControl(EntityManager *entity_manager, GameStateManager *game_state_manager);
         void update();
         void draw_select();
-        void attach_to_animal(const std::shared_ptr<Animal>& animal);
+        void attach_to_animal(const std::shared_ptr<Entity>& animal);
         void detach_from_animal();
         const std::shared_ptr<Animal>& get_animal() const;
         void move_player();
@@ -29,7 +29,7 @@ class PlayerControl
 // ==================
 // methods definition
 // ==================
-PlayerControl::PlayerControl(const EntityManager &entity_manager, const GameStateManager &game_state_manager)
+PlayerControl::PlayerControl(EntityManager *entity_manager, GameStateManager *game_state_manager)
     : m_entity_manager(entity_manager), m_game_state_manager(game_state_manager)
 {   
 }
@@ -47,7 +47,7 @@ void PlayerControl::draw_select()
     Rectangle draw_rect = {rect.x - size / 2, rect.y - size / 2, 2*size, 2*size};
     DrawRectCorners(draw_rect, 1, draw_rect.width/4, WHITE);
 }
-void PlayerControl::attach_to_animal(const std::shared_ptr<Animal>& animal)
+void PlayerControl::attach_to_animal(const std::shared_ptr<Entity>& animal)
 {
     m_selected_animal = animal;
 }
@@ -61,7 +61,7 @@ const std::shared_ptr<Animal>& PlayerControl::get_animal() const
 }
 void PlayerControl::move_player()
 {
-    if (m_game_state_manager.get_game_state() != GameState::GAME_STATE_PLAYING) return;
+    if (m_game_state_manager->get_game_state() != GameState::GAME_STATE_PLAYING) return;
 
     if (IsKeyDown(KEY_UP))
     {
@@ -74,7 +74,7 @@ void PlayerControl::move_player()
 }
 void PlayerControl::rotate_player()
 {
-    if (m_game_state_manager.get_game_state() != GameState::GAME_STATE_PLAYING) return;
+    if (m_game_state_manager->get_game_state() != GameState::GAME_STATE_PLAYING) return;
 
     if (IsKeyDown(KEY_LEFT))
     {
@@ -91,8 +91,8 @@ void PlayerControl::select_player()
 
     Vector2 mouse_pos = GetMousePosition();
     // rework get all animals
-    std::vector<std::shared_ptr<Entity>> entities = m_entity_manager.get_all_entities();
-    for (size_t i = 0; i < m_entity_manager.get_all_entities().size(); i++)
+    std::vector<std::shared_ptr<Entity>> entities = m_entity_manager->get_all_entities();
+    for (size_t i = 0; i < m_entity_manager->get_all_entities().size(); i++)
     {
         Rectangle& body = entities[i]->get_body();
         if (CheckCollisionPointRec(mouse_pos, body) && m_selected_animal->is_playable())

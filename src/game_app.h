@@ -2,11 +2,12 @@
 
 #include "raylib.h"
 #include "basic_settings.h"
+#include "entity_manager.h"
 
 class GameApp
 {
     public:
-        // EntityManager entity_manager;
+        EntityManager entity_manager = EntityManager(this);
         // GameStateHandler game_state_handler;
         // PhysicsEngine physics_engine;
         // Renderer renderer;
@@ -24,50 +25,3 @@ class GameApp
         void render();
         void run_debugger();
 };
-
-
-GameApp::GameApp()
-{
-}
-GameApp::~GameApp()
-{
-}
-void GameApp::run()
-{
-    int WINDOW_WIDTH = 800;
-    int WINDOW_HEIGHT = 600;
-
-    float delta_time = 0.0f;
-
-    InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "EVOLUTION");
-
-    while(!WindowShouldClose())
-    {
-        BeginDrawing();
-
-        delta_time = GetFrameTime() - delta_time;
-
-        update(delta_time);
-        render();
-        run_debugger();
-
-        ClearBackground(BLACK);
-        EndDrawing();
-    }
-
-    CloseWindow();
-
-}
-void GameApp::update(float delta_time)
-{
-}
-void GameApp::render()
-{
-}
-void GameApp::run_debugger()
-{
-    if (IsKeyPressed(KEY_F1))
-    {
-        // debugger.render(*this);
-    }
-}
