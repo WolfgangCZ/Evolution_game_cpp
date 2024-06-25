@@ -8,17 +8,25 @@
 class EntityManager
 {
     public:
+        // it might be faster in the future to create entity map
+        EntityManager();
+        int last_id = 0;
         void add_animal();
         void add_animal(const std::shared_ptr<Animal> &animal);
         void remove_entity(const std::shared_ptr<Animal> &animal);
         void update();
-
+        int get_new_id();
+        std::vector<std::shared_ptr<Entity>> entities; 
         std::vector<std::shared_ptr<Entity>> &get_all_entities();
         const std::vector<std::shared_ptr<Entity>> &get_all_entities() const;
 
     private:
         std::vector<std::shared_ptr<Entity>> entities;
 };
+
+EntityManager::EntityManager()
+{
+}
 
 void EntityManager::add_animal()
 {
@@ -46,6 +54,11 @@ void EntityManager::update()
         entities[i]->update();
     }
 }
+int EntityManager::get_new_id()
+{
+    last_id++;
+    return last_id;
+}
 std::vector<std::shared_ptr<Entity>> &EntityManager::get_all_entities()
 {
     return entities;
@@ -54,6 +67,7 @@ const std::vector<std::shared_ptr<Entity>> &EntityManager::get_all_entities() co
 {
     return entities;
 }
+
 // create more buffers and wire them together
 // main buffer for all entities
 // buffer for only animals
