@@ -4,7 +4,6 @@
 
 #include "animal.h"
 
-
 // create more buffers and wire them together
 // main buffer for all entities
 // buffer for only animals
@@ -26,8 +25,8 @@ class EntityManager
         int get_new_id();
         std::vector<std::shared_ptr<Entity>> &get_all_entities();
         const std::vector<std::shared_ptr<Entity>> &get_all_entities() const;
-        GameApp *game_app;
 
     private:
         std::vector<std::shared_ptr<Entity>> entities;
+        GameApp *game_app;
 };
