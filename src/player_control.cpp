@@ -1,5 +1,4 @@
 #include "player_control.h"
-// how the fuck do i fix this incomplete game app?
 
 PlayerControl::PlayerControl(GameApp *game)
     : m_game_app(game)

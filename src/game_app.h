@@ -3,12 +3,14 @@
 #include "raylib.h"
 #include "basic_settings.h"
 #include "entity_manager.h"
+#include "basic_settings.h"
 
 class GameApp
 {
-    public:
+    private:
         EntityManager entity_manager = EntityManager(this);
-        // GameStateHandler game_state_handler;
+        GameStateManager game_state_manager;
+        BasicSettings basic_settings;
         // PhysicsEngine physics_engine;
         // Renderer renderer;
         // AudioManager audio_manager;
@@ -18,6 +20,7 @@ class GameApp
         // EnvironmentManager environment_manager;
         // Debugger debugger;
 
+    public:
         GameApp();
         ~GameApp();
         void run();
