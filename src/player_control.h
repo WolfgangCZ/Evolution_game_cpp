@@ -13,10 +13,9 @@ class GameApp;
 class PlayerControl
 {
     private:
-        GameApp *m_game_app; 
         std::shared_ptr<Entity> m_selected_animal;
     public:
-        PlayerControl(GameApp *game);
+        PlayerControl();
         void update();
         void draw_select();
         void attach_to_animal(const std::shared_ptr<Entity>& animal);

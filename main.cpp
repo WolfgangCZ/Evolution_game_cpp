@@ -5,7 +5,7 @@ int main()
 {
     GameApp game;
     std::cout << "Game started" << std::endl;
-    game.run();
+    game.run_game_loop();
     std::cout << "Game ended" << std::endl;
     return 0;
 }

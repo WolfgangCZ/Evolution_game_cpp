@@ -6,7 +6,11 @@ GameApp::GameApp()
 GameApp::~GameApp()
 {
 }
-void GameApp::run()
+void GameApp::init()
+{
+    entity_manager = std::make_shared<EntityManager> ();
+}
+void GameApp::run_game_loop()
 {
     int WINDOW_WIDTH = 800;
     int WINDOW_HEIGHT = 600;
@@ -34,7 +38,7 @@ void GameApp::run()
 }
 void GameApp::update(float delta_time)
 {
-    entity_manager.update();
+    entity_manager->update();
 }
 void GameApp::render()
 {

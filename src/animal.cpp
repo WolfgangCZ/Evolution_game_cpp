@@ -39,8 +39,8 @@ void Animal::update_direction()
 }
 void Animal::apply_friction()
 {
-    m_velocity *= animal_friction;
-    m_rot_velocity *= animal_friction;
+    m_velocity *= m_friction;
+    m_rot_velocity *= m_friction;
 }
 void Animal::move_forward()
 {

@@ -4,18 +4,20 @@
 #include "basic_settings.h"
 #include "entity_manager.h"
 #include "basic_settings.h"
+#include "game_state_manager.h"
+#include "custom_types.h"
+
 
 class GameApp
 {
     private:
-        EntityManager entity_manager = EntityManager(this);
-        GameStateManager game_state_manager;
-        BasicSettings basic_settings;
+        s_ptr<EntityManager> entity_manager;
+        Config config;
         // PhysicsEngine physics_engine;
         // Renderer renderer;
         // AudioManager audio_manager;
         // AIController ai_controller;
-        // PlayerCharacter player_character;
+        PlayerControl player_control;
         // InputManager input_manager;
         // EnvironmentManager environment_manager;
         // Debugger debugger;
@@ -23,7 +25,8 @@ class GameApp
     public:
         GameApp();
         ~GameApp();
-        void run();
+        void init();
+        void run_game_loop();
         void update(float delta_time);
         void render();
         void run_debugger();

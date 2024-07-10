@@ -11,7 +11,6 @@
 #include "game_state_manager.h"
 #include "event_listener.h"
 
-
 class Animal : public Entity
 {
     //structure 
@@ -50,6 +49,7 @@ class Animal : public Entity
         float m_velocity = 0;
         float m_rot_velocity = 0;
         float m_mass = 1;
+        float m_friction = 0.9;
 
         std::string species_name = "animal";
         Color m_color = RED;
