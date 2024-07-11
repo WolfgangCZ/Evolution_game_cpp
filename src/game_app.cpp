@@ -12,12 +12,9 @@ void GameApp::init()
 }
 void GameApp::run_game_loop()
 {
-    int WINDOW_WIDTH = 800;
-    int WINDOW_HEIGHT = 600;
-
     float delta_time = 0.0f;
 
-    InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "EVOLUTION");
+    InitWindow(basic_config.WINDOW_WIDTH, basic_config.WINDOW_HEIGHT, "EVOLUTION");
 
     while(!WindowShouldClose())
     {
@@ -38,6 +35,7 @@ void GameApp::run_game_loop()
 }
 void GameApp::update(float delta_time)
 {
+    // player control
     entity_manager->update();
 }
 void GameApp::render()

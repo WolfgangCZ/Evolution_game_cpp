@@ -1,6 +1,6 @@
 #include "player_control.h"
 
-PlayerControl::PlayerControl(GameApp *game)
+PlayerControl::PlayerControl()
     : m_game_app(game)
 {   
 }

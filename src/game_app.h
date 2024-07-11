@@ -3,8 +3,9 @@
 #include "raylib.h"
 #include "basic_settings.h"
 #include "entity_manager.h"
-#include "basic_settings.h"
+#include "basic_config.h"
 #include "game_state_manager.h"
+#include "player_control.h"
 #include "custom_types.h"
 
 
@@ -12,12 +13,12 @@ class GameApp
 {
     private:
         s_ptr<EntityManager> entity_manager;
-        Config config;
+        s_ptr<PlayerControl> player_control;
+        BasicConfig basic_config;
         // PhysicsEngine physics_engine;
         // Renderer renderer;
         // AudioManager audio_manager;
         // AIController ai_controller;
-        PlayerControl player_control;
         // InputManager input_manager;
         // EnvironmentManager environment_manager;
         // Debugger debugger;
