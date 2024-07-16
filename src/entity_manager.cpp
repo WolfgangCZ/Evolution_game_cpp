@@ -2,9 +2,8 @@
 
 class GameApp;
 
-EntityManager::EntityManager(GameApp *game)
+EntityManager::EntityManager()
 {
-    game_app = game;
 }
 
 void EntityManager::add_animal()

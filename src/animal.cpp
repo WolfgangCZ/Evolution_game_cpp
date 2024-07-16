@@ -11,16 +11,18 @@
 
 
 //create animal with position, rotation and default size
-Animal::Animal() : Animal(RAND_WIN_POS_X, RAND_WIN_POS_Y, RAND_0_2RAD_FLOAT, ANIMAL_SIZE)
+Animal::Animal() : Animal(RAND_WIN_POS_X, RAND_WIN_POS_Y, RAND_0_2RAD_FLOAT)
 {
 }
 
-Animal::Animal(float x, float y, float rotation, float size) : m_body{Rectangle{x,y,size,size}}
+Animal::Animal(float x, float y, float rotation)
+    : m_body{Rectangle{x, y, basic_config.SIZE_MULTIPLIER, basic_config.SIZE_MULTIPLIER}}
 {
     m_movement_dir = Vector2Rotate(Vector2{0, 1}, rotation);
     m_face_dir = m_movement_dir;
     m_mass = m_body.height * m_body.width;
 }
+
 void Animal::update()
 {
     update_direction();

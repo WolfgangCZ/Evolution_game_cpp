@@ -1,6 +1,6 @@
 #include "game_state_manager.h"
 #include "custom_types.h"
-
+/*
 GameState GameStateManager::get_game_state()
 {
     return game_state;
@@ -18,3 +18,4 @@ s_ptr<GameStateManager> GameStateManager::get_instance()
     }
     return instance;
 }
+*/

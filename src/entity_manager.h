@@ -16,7 +16,7 @@ class EntityManager
 {
     public:
         // it might be faster in the future to create entity map
-        EntityManager(GameApp *game);
+        EntityManager();
         int last_id = 0;
         void add_animal();
         void add_animal(const std::shared_ptr<Animal> &animal);

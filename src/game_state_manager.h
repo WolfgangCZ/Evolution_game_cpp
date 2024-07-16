@@ -2,6 +2,9 @@
 
 #include <memory>
 
+#include "custom_types.h"
+
+/*
 enum class GameState
 {
     GAME_STATE_GLOBAL = 0,
@@ -23,7 +26,6 @@ class GameStateManager
     public:
         GameState get_game_state();
         void set_game_state(const GameState &state);
-        static std::shared_ptr<GameStateManager> get_instance();
+        static s_ptr<GameStateManager> get_instance();
 };
-
-std::shared_ptr<GameStateManager> game_state_manager = std::make_shared<GameStateManager> ();
+*/

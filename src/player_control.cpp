@@ -1,8 +1,8 @@
 #include "player_control.h"
 
-PlayerControl::PlayerControl()
-    : m_game_app(game)
-{   
+PlayerControl::PlayerControl(s_ptr<EntityManager> entity_manager)
+{
+    m_entity_manager = entity_manager; 
 }
 void PlayerControl::update()
 {
@@ -19,7 +19,7 @@ void PlayerControl::draw_select()
     Rectangle draw_rect = {rect.x - size / 2, rect.y - size / 2, 2*size, 2*size};
     DrawRectCorners(draw_rect, 1, draw_rect.width/4, WHITE);
 }
-void PlayerControl::attach_to_animal(const std::shared_ptr<Entity>& animal)
+void PlayerControl::attach_to_animal(const std::shared_ptr<Animal>& animal)
 {
     m_selected_animal = animal;
 }
@@ -29,8 +29,6 @@ void PlayerControl::detach_from_animal()
 }
 void PlayerControl::move_player()
 {
-    if (m_game_app->game_state_manager->get_game_state() != GameState::GAME_STATE_PLAYING) return;
-
     if (IsKeyDown(KEY_UP))
     {
         m_selected_animal->move_forward();
@@ -42,8 +40,6 @@ void PlayerControl::move_player()
 }
 void PlayerControl::rotate_player()
 {
-    if (m_game_state_manager->get_game_state() != GameState::GAME_STATE_PLAYING) return;
-
     if (IsKeyDown(KEY_LEFT))
     {
         m_selected_animal->turn_left();
@@ -59,10 +55,10 @@ void PlayerControl::select_player()
 
     Vector2 mouse_pos = GetMousePosition();
     // rework get all animals
-    std::vector<std::shared_ptr<Entity>> entities = m_entity_manager->get_all_entities();
+    std::vector<s_ptr<Entity>> entities = m_entity_manager->get_all_entities();
     for (size_t i = 0; i < m_entity_manager->get_all_entities().size(); i++)
     {
-        Rectangle& body = entities[i]->get_body();
+        Rectangle body = entities[i]->get_body();
         if (CheckCollisionPointRec(mouse_pos, body) && m_selected_animal->is_playable())
         {
             detach_from_animal();

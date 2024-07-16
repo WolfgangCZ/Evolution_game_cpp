@@ -1,7 +1,7 @@
 #pragma once
 
 #include "raylib.h"
-#include "basic_settings.h"
+#include "basic_config.h"
 #include "entity_manager.h"
 #include "basic_config.h"
 #include "game_state_manager.h"

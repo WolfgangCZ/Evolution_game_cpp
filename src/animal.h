@@ -18,7 +18,7 @@ class Animal : public Entity
     //observers to wire it together?
     public:
         Animal();
-        Animal(float x, float y, float rotation, float size);
+        Animal(float x, float y, float rotation);
 
         virtual void update() override;
         void update_position();
@@ -39,7 +39,7 @@ class Animal : public Entity
         bool is_playable();
 
     private:
-        Rectangle m_body = Rectangle{0.0f,0.0f,0.0f,0.0f};
+        Rectangle m_body = Rectangle{0.0f,0.0f,10.0f,10.0f};
 
         Vector2 m_movement_dir = Vector2{0.0f,1.0f};
         Vector2 m_face_dir = Vector2{0.0f,1.0f};
