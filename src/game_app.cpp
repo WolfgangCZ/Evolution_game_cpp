@@ -1,4 +1,6 @@
+#include <iostream>
 #include "game_app.h"
+#include "basic_config.h"
 
 GameApp::GameApp()
 {
@@ -13,7 +15,8 @@ void GameApp::init()
 void GameApp::run_game_loop()
 {
     float delta_time = 0.0f;
-
+    std::cout << "Window width: " << basic_config.WINDOW_WIDTH << std::endl;
+    std::cout << "Window height: " << basic_config.WINDOW_HEIGHT << std::endl;
     InitWindow(basic_config.WINDOW_WIDTH, basic_config.WINDOW_HEIGHT, "EVOLUTION");
 
     while(!WindowShouldClose())

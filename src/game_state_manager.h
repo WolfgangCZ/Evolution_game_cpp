@@ -1,8 +1,8 @@
-#pragma once
+// #pragma once
 
-#include <memory>
+// #include <memory>
 
-#include "custom_types.h"
+// #include "custom_types.h"
 
 /*
 enum class GameState

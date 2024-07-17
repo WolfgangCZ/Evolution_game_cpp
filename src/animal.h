@@ -8,7 +8,6 @@
 #include "entity.h"
 #include "raylib.h"
 #include "basic_config.h"
-#include "game_state_manager.h"
 #include "event_listener.h"
 
 class Animal : public Entity
@@ -39,7 +38,7 @@ class Animal : public Entity
         bool is_playable();
 
     private:
-        Rectangle m_body = Rectangle{0.0f,0.0f,10.0f,10.0f};
+        Rectangle m_body = Rectangle{0.0f,0.0f,10.0f,0.0f};
 
         Vector2 m_movement_dir = Vector2{0.0f,1.0f};
         Vector2 m_face_dir = Vector2{0.0f,1.0f};

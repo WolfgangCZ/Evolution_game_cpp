@@ -27,6 +27,5 @@ class EntityManager
         const std::vector<std::shared_ptr<Entity>> &get_all_entities() const;
 
     private:
-        std::vector<std::shared_ptr<Entity>> entities;
-        GameApp *game_app;
+        std::vector<std::shared_ptr<Entity>> m_all_entities;
 };

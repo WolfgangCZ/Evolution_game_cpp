@@ -3,8 +3,6 @@
 #include "raylib.h"
 #include "basic_config.h"
 #include "entity_manager.h"
-#include "basic_config.h"
-#include "game_state_manager.h"
 #include "player_control.h"
 #include "custom_types.h"
 
@@ -12,9 +10,8 @@
 class GameApp
 {
     private:
-        s_ptr<EntityManager> entity_manager;
-        s_ptr<PlayerControl> player_control;
-        BasicConfig basic_config;
+        sh_ptr<EntityManager> entity_manager;
+        sh_ptr<PlayerControl> player_control;
         // PhysicsEngine physics_engine;
         // Renderer renderer;
         // AudioManager audio_manager;

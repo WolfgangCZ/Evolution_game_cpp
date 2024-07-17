@@ -5,8 +5,7 @@
 #include "entity_manager.h"
 #include "animal.h"
 #include "raylib.h"
-#include "raylib_draw_extension.h"
-#include "game_state_manager.h"
+#include "custom_types.h"
 
 class GameApp;
 
@@ -16,10 +15,10 @@ class PlayerControl
         std::shared_ptr<Animal> m_selected_animal;
         std::shared_ptr<EntityManager> m_entity_manager;
     public:
-        PlayerControl(s_ptr<EntityManager> entity_manager);
+        PlayerControl(sh_ptr<EntityManager> entity_manager);
         void update();
         void draw_select();
-        void attach_to_animal(const std::shared_ptr<Animal>& animal);
+        void attach_to_animal(const std::shared_ptr<Entity>& animal);
         void detach_from_animal();
         const std::shared_ptr<Animal>& get_animal() const;
         void move_player();

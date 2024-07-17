@@ -1,6 +1,7 @@
 #include "player_control.h"
+#include "raylib_draw_extension.h"
 
-PlayerControl::PlayerControl(s_ptr<EntityManager> entity_manager)
+PlayerControl::PlayerControl(sh_ptr<EntityManager> entity_manager)
 {
     m_entity_manager = entity_manager; 
 }
@@ -19,9 +20,10 @@ void PlayerControl::draw_select()
     Rectangle draw_rect = {rect.x - size / 2, rect.y - size / 2, 2*size, 2*size};
     DrawRectCorners(draw_rect, 1, draw_rect.width/4, WHITE);
 }
-void PlayerControl::attach_to_animal(const std::shared_ptr<Animal>& animal)
+void PlayerControl::attach_to_animal(const std::shared_ptr<Entity>& animal)
 {
-    m_selected_animal = animal;
+    std::shared_ptr<Animal> animal_casted = std::static_pointer_cast<Animal>(animal);
+    m_selected_animal = animal_casted;
 }
 void PlayerControl::detach_from_animal()
 {
@@ -54,8 +56,8 @@ void PlayerControl::select_player()
     if (!IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) return;
 
     Vector2 mouse_pos = GetMousePosition();
-    // rework get all animals
-    std::vector<s_ptr<Entity>> entities = m_entity_manager->get_all_entities();
+    // rework get all animals and entity manager - ability to get only animals (or playable stuff)
+    std::vector<sh_ptr<Entity>> entities = m_entity_manager->get_all_entities();
     for (size_t i = 0; i < m_entity_manager->get_all_entities().size(); i++)
     {
         Rectangle body = entities[i]->get_body();
