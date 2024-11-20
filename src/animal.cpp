@@ -28,7 +28,6 @@ void Animal::update()
     update_direction();
     update_position();
     apply_friction();
-    draw_animal();
 }
 void Animal::update_position()
 {
@@ -60,15 +59,6 @@ void Animal::turn_right()
 void Animal::turn_left()
 {
     turn(-m_rot_strenght);
-}
-void Animal::draw_animal()
-{
-    DrawRectanglePro(
-        m_body, 
-        Vector2{m_body.width / 2, m_body.height / 2}, 
-        Vector2Angle(m_face_dir, Vector2Zero()) * RAD2DEG, 
-        m_color
-        );
 }
 Vector2 Animal::get_face_dir()
 {
@@ -107,6 +97,10 @@ void Animal::move(float force)
 void Animal::turn(float force)
 {
     m_rot_velocity += force / m_mass;
+}
+Color Animal::get_color()
+{
+    return m_color;
 }
 bool Animal::is_playable()
 {

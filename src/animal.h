@@ -28,13 +28,13 @@ class Animal : public Entity
         void turn_right();
         void turn_left();
 
-        void draw_animal();
         Vector2 get_face_dir();
         Vector2 get_position();
         float get_velocity();
         float get_rot_angle();
         float get_size();
         Rectangle get_body();
+        Color get_color();
         bool is_playable();
 
     private:

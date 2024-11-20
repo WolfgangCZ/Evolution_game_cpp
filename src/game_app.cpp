@@ -28,7 +28,8 @@ void GameApp::run_game_loop()
         update(delta_time);
         render();
         run_debugger();
-
+        if (IsKeyPressed(KEY_A))
+            entity_manager->add_animal();
         ClearBackground(BLACK);
         EndDrawing();
     }
@@ -43,6 +44,7 @@ void GameApp::update(float delta_time)
 }
 void GameApp::render()
 {
+    renderer.render(entity_manager->get_all_entities());
 }
 void GameApp::run_debugger()
 {

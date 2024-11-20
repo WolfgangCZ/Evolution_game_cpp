@@ -5,6 +5,7 @@
 #include "entity_manager.h"
 #include "player_control.h"
 #include "custom_types.h"
+#include "renderer.h"
 
 
 class GameApp
@@ -13,7 +14,7 @@ class GameApp
         sh_ptr<EntityManager> entity_manager;
         sh_ptr<PlayerControl> player_control;
         // PhysicsEngine physics_engine;
-        // Renderer renderer;
+        Renderer renderer;
         // AudioManager audio_manager;
         // AIController ai_controller;
         // InputManager input_manager;
