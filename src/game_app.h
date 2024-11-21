@@ -1,6 +1,6 @@
 #pragma once
 
-#include "raylib.h"
+#include "../include/raylib.h"
 #include "basic_config.h"
 #include "entity_manager.h"
 #include "player_control.h"

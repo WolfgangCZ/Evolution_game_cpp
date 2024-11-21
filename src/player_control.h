@@ -4,7 +4,7 @@
 
 #include "entity_manager.h"
 #include "animal.h"
-#include "raylib.h"
+#include "../include/raylib.h"
 #include "custom_types.h"
 
 class GameApp;
@@ -12,8 +12,8 @@ class GameApp;
 class PlayerControl
 {
     private:
-        std::shared_ptr<Animal> m_selected_animal;
-        std::shared_ptr<EntityManager> m_entity_manager;
+        sh_ptr<Animal> m_selected_animal;
+        sh_ptr<EntityManager> m_entity_manager;
     public:
         PlayerControl(sh_ptr<EntityManager> entity_manager);
         void update();

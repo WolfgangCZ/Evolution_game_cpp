@@ -1,5 +1,5 @@
 #include <iostream>
-#include "game_app.h"
+#include "./src/game_app.h"
 
 int main()
 {
@@ -10,5 +10,8 @@ int main()
     game.run_game_loop();
 
     std::cout << "Game ended" << std::endl;
+
+    int number = 1;
+
     return 0;
 }

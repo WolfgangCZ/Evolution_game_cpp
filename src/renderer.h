@@ -4,7 +4,7 @@
 #include <vector>
 
 #include "entity.h"
-#include "raylib.h"
+#include "../include/raylib.h"
 #include "custom_types.h"
 
 class Renderer

@@ -4,7 +4,7 @@
 #include <deque>
 
 #include "animal.h"
-#include "raylib.h"
+#include "../include/raylib.h"
 
 enum UserInputEvent
 {

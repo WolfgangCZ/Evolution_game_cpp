@@ -1,12 +1,12 @@
 #pragma once
 
 #include <string>
+#include "../include/raylib.h"
 #include <cmath>
 #include <unordered_map>
 #include <functional>
 
 #include "entity.h"
-#include "raylib.h"
 #include "basic_config.h"
 #include "event_listener.h"
 
