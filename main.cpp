@@ -1,17 +1,21 @@
 #include <iostream>
-#include "./src/game_app.h"
+#include "./include/raylib.h"
 
 int main()
 {
-    GameApp game;
-    std::cout << "Game started" << std::endl;
+    std::cout << "START" << std::endl;
+    int window_width = 800;
+    int window_height = 600;
 
-    game.init();
-    game.run_game_loop();
+    InitWindow(window_width, window_height, "HELLO WORLD");
 
-    std::cout << "Game ended" << std::endl;
+    while (!WindowShouldClose())
+    {
+        BeginDrawing();
+        ClearBackground(BLACK);
+        EndDrawing();
+    }
 
-    int number = 1;
-
+    std::cout << "DONE" << std::endl;
     return 0;
 }
