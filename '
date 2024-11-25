@@ -10,13 +10,15 @@
 #include <cstring>
 
 
-
 #include "./include/raylib.h"
 #include "./include/raymath.h"
 #include "./src/geometry.h"
-#include "./src/assert.h"
-#include "./src/random.h"
 
+#define RAND_INT(min, max) GetRandomValue(min, max)
+#define RAND_CHAR (unsigned char)(GetRandomValue(0, 255))
+#define RAND_FLOAT(min, max) (float)(GetRandomValue(min, max))
+
+#define assertm(exp, msg) assert(((void)msg, exp))
 
 // hello
 static size_t collision_checks = 0;
@@ -87,7 +89,7 @@ class CircleObject: public PhysicsObject
         CircleObject(float _radius, Vector2 start_pos, Color color):
             PhysicsObject{start_pos}, radius(_radius), color(color)
             {
-               mass = PI * radius * radius;
+                mass = PI * radius * radius;
                 inv_mass = 1.0f / mass;
             }
         void draw()
@@ -264,14 +266,14 @@ class Solver
                 {
                     const int col = int(m_objects[i]->position.x / grid.box_w);
                     const int row = int(m_objects[i]->position.y / grid.box_h);
-                    GridBox &this_box = grid.boxes[col][row];
-                    if (this_box.checked) continue;
+                    GridBox * this_box = &grid.boxes[col][row];
+                    if (this_box->checked) continue;
                     std::list<GridBox *> adj_boxes = get_adjacent_boxes(col, row);
                     for (auto it_adj_box = adj_boxes.begin(); it_adj_box != adj_boxes.end(); ++it_adj_box) 
                     {
                         const GridBox * close_box = *it_adj_box;
                         if (close_box->checked || close_box->obj_list.empty()) continue;
-                        for (auto it_obj1 = this_box.obj_list.begin(); it_obj1 != this_box.obj_list.end(); ++it_obj1)
+                        for (auto it_obj1 = this_box->obj_list.begin(); it_obj1 != this_box->obj_list.end(); ++it_obj1)
                         {
                             CircleObject *obj1 = *it_obj1;
                             for (auto it_obj2 = (*it_adj_box)->obj_list.begin(); it_obj2 != (*it_adj_box)->obj_list.end(); ++it_obj2)
@@ -279,38 +281,69 @@ class Solver
                                 CircleObject *obj2 = *it_obj2;
                                 if (obj1 == obj2) continue;
                                 const float dist_nosqrt = pow(obj1->position.x - obj2->position.x, 2) +
-                                                          pow(obj1->position.y - obj2->position.y, 2);
+                                                        pow(obj1->position.y - obj2->position.y, 2);
                                 const float min_dist = obj1->radius + obj2->radius;
                                 const float min_dist_pow = min_dist * min_dist;
-                                collision_checks++;
+                                // Check overlapping
                                 if (dist_nosqrt < min_dist_pow) 
                                 {
                                     const Vector2 displacement = Vector2Subtract(obj2->position, 
                                                                                 obj1->position);
                                     const Vector2 normal = Vector2Normalize(displacement); 
                                     const Vector2 relative_velocity = Vector2Subtract(obj2->velocity,
-                                                                                      obj1->velocity); 
-                                    float vel_along_normal = Vector2DotProduct(relative_velocity, normal);
+                                                                                    obj1->velocity); 
+                                    if (relative_velocity < 0) continue;
                                     const float dist = sqrt(dist_nosqrt);
                                     const float overlap = dist - obj1->radius - obj2->radius;
                                     const Vector2 push_back = Vector2Scale(normal, overlap/2);
                                     obj1->position = Vector2Add(obj1->position, push_back);
                                     obj2->position = Vector2Subtract(obj2->position, push_back);
 
-                                    float force_absorb = 0.9f;
+                                    float vel_along_normal = Vector2DotProduct(relative_velocity, normal);
+                                    float force_absorb = 0.75;
                                     float impulse = -2*force_absorb * vel_along_normal / (obj1->get_inv_mass() + obj2->get_inv_mass());
                                     obj1->add_velocity(Vector2Scale(normal, -impulse / obj1->mass));
                                     obj2->add_velocity(Vector2Scale(normal, impulse / obj2->mass));
+                                    collision_checks++;
                                 }
                             }
                         }
                     }
-                    this_box.checked = true;
+                    this_box->checked = true;
                 }
             });
         }
 };
 
+class Renderer
+{
+    private:
+        const std::vector<CircleObject *> &m_objects;
+    public:
+        Renderer(const std::vector<CircleObject *> &objects):
+            m_objects(objects)
+        {}
+        void render()
+        {
+            for (size_t i =0; i < m_objects.size(); i++)
+            {
+                m_objects[i]->draw();
+            }
+        }
+};
+
+void draw_grid(int cols, int rows, int cell_w, int cell_h)
+{
+    for (int col = 0; col < cols; col++)
+    {
+        DrawLine(col*cell_w, 0.0, col*cell_w, config.win_h, LIGHTGRAY);         
+        for (int row = 0; row < rows; row++)
+        {
+            DrawLine(0.0, row*cell_h, config.win_w, row*cell_h, LIGHTGRAY);
+        }
+    }
+}
+    
 
 const float MAX_BALL_RADIUS = 5.0f;
 const Vector2 CENTER = Vector2{config.win_w/2, config.win_h/2}; 
@@ -383,8 +416,8 @@ int main()
             safe_clear(all_objects);
         }
         EndDrawing();
-        /*std::cout << "FPS: " << 1/dt << std::endl;*/
-        /*std::cout << "Number of objects: " << all_objects.size() << std::endl;*/
+        std::cout << "FPS: " << 1/dt << std::endl;
+        std::cout << "Number of objects: " << all_objects.size() << std::endl;
     }
    
 
