@@ -15,7 +15,7 @@
 #include "./src/geometry.h"
 #include "./src/random.h"
 #include "./src/config.h"
-#include "./src/w_render/renderer.h"
+#include "./src/w_engine/renderer.h"
 #include "./src/w_engine/grid.h"
 #include "./src/w_engine/solver.h"
 #include "./src/w_engine/grid.h"
@@ -66,9 +66,9 @@ int main()
     InitWindow(GConfig::config.win_w, GConfig::config.win_h, "HELLO WORLD");
     std::vector<wEng::CircleObject *> all_objects;
     all_objects.reserve(10000);
-    wEng::Solver solver = wEng::Solver{all_objects};
+    wEng::WSolver solver = wEng::WSolver{all_objects};
     solver.set_substeps(SUB_STEPS);
-    wRen::Renderer renderer = wRen::Renderer(all_objects);
+    wEng::Renderer renderer = wRen::Renderer(all_objects);
 
     SetTargetFPS(60);
 
@@ -79,6 +79,11 @@ int main()
 
         BeginDrawing();
         ClearBackground(GConfig::config.background_color);
+        wRen::draw_grid(wEng::GRID_COLS, 
+                        wEng::GRID_ROWS, 
+                        wEng::GRID_BOX_W, 
+                        wEng::GRID_BOX_H
+                        );
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || IsKeyDown(KEY_A))
         {
@@ -98,11 +103,6 @@ int main()
         renderer.render();
         DrawText(_int_label("Objects count: ", all_objects.size()).c_str(), 20, 20, 10, WHITE);
         DrawText(_float_label("FPS: ", 1/dt).c_str(), 20, 40, 10, WHITE);
-        // wRen::draw_grid(wEng::GRID_COLS, 
-        //                 wEng::GRID_ROWS, 
-        //                 wEng::GRID_BOX_W, 
-        //                 wEng::GRID_BOX_H
-        //                 );
         if (IsKeyPressed(KEY_S))
         {
             safe_clear(all_objects);

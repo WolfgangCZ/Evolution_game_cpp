@@ -5,7 +5,7 @@ LDFLAGS = -L lib/
 LIBS = -lraylib -lopengl32 -lgdi32 -lwinmm
 INCLUDES = -I include/ -I src/
 STD = -std=c++20
-OPT = -O3
+OPT = -O0
 
 # Profiling flags
 PG = -pg

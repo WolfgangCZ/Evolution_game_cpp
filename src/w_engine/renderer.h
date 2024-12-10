@@ -5,7 +5,7 @@
 #include "../include/raylib.h"
 #include "w_engine/circle.h"
 
-namespace wRen
+namespace wEng
 {
     class Renderer
     {
@@ -28,10 +28,10 @@ namespace wRen
     {
         for (int col = 0; col < cols; col++)
         {
-            DrawLine(col*cell_w, 0.0, col*cell_w, cell_h * rows, LIGHTGRAY);         
+            DrawLine(col*cell_w, 0.0, col*cell_w, cell_h * rows, BLACK);         
             for (int row = 0; row < rows; row++)
             {
-                DrawLine(0.0, row*cell_h, cell_w * cols, row*cell_h, LIGHTGRAY);
+                DrawLine(0.0, row*cell_h, cell_w * cols, row*cell_h, BLACK);
             }
         }
     }

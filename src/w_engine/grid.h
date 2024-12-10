@@ -18,14 +18,16 @@ namespace wEng
     const float GRID_BOX_W = GConfig::config.win_w / GRID_COLS;
     const float GRID_BOX_H = GConfig::config.win_h / GRID_ROWS;
 
+    template<typename T>
     struct GridBox
     {
         int col;
         int row;
         bool checked = false;
-        std::list<CircleObject *> obj_list;
+        std::list<T *> obj_list;
     };
 
+    template<typename T>
     class SolverGrid
     {
         public:
@@ -33,7 +35,7 @@ namespace wEng
             int rows;
             float box_w;
             float box_h;
-            std::vector<std::vector<GridBox>> boxes;
+            std::vector<std::vector<GridBox<T>>> boxes;
         
             SolverGrid():
                 cols(GRID_COLS),

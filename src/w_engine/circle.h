@@ -1,11 +1,11 @@
 #pragma once
 
 #include "../../include/raylib.h"
-#include "body.h"
+#include "w_object.h"
 
 namespace wEng
 {
-    class CircleObject: public Object
+    class CircleObject: public WObject
     {
         private:
             float inv_mass;
@@ -18,7 +18,7 @@ namespace wEng
                 this->id = id;
             }
             CircleObject(float _radius, Vector2 start_pos, Color color):
-                Object{start_pos}, radius(_radius), color(color)
+                WObject{start_pos}, radius(_radius), color(color)
                 {
                 mass = PI * radius * radius;
                     inv_mass = 1.0f / mass;

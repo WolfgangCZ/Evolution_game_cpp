@@ -2,19 +2,21 @@
 
 #include <iostream>
 #include "../../include/raylib.h"
+#include "../../include/raymath.h"
+#include "../random.h"
 
 static size_t obj_created = 0;
 
 namespace wEng
 {
-    class Object
+    class WObject
     {
         public:
             size_t id = 0;
             Vector2 position;
             Vector2 velocity;
 
-            Object(const Vector2 &start_pos): 
+            WObject(const Vector2 &start_pos): 
                 id(obj_created++),
                 position(start_pos), 
                 velocity(Vector2{RAND_FLOAT(-100, 100), RAND_FLOAT(-100, 100)})

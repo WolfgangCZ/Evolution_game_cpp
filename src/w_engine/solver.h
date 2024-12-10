@@ -6,7 +6,7 @@
 
 #include "../../include/raylib.h"
 #include "../config.h"
-#include "body.h"
+#include "w_object.h"
 #include "circle.h"
 #include "grid.h"
 #include "settings.h"
@@ -15,19 +15,19 @@
 
 namespace wEng
 {
-    class Solver
+    class WSolver
     {
         private:
             const std::vector<CircleObject *> &m_objects;
             std::vector<std::function<void(CircleObject *)>> operations;
             size_t m_substeps = settings.sub_steps;
-            SolverGrid grid;
+            SolverGrid<CircleObject> grid;
 
         public:
-            Solver(const std::vector<CircleObject *> &objects): m_objects(objects), grid(SolverGrid{})
+            WSolver(const std::vector<CircleObject *> &objects): m_objects(objects), grid(SolverGrid<CircleObject>{})
             {
             }
-            const SolverGrid &get_grid() const
+            const SolverGrid<CircleObject> &get_grid() const
             {
                 return grid;
             }
@@ -74,9 +74,9 @@ namespace wEng
                     circle->update_position(step_dt);
                 });
             }
-            std::list<GridBox *> get_adjacent_boxes(int col, int row)
+            std::list<GridBox<CircleObject> *> get_adjacent_boxes(int col, int row)
             {
-                std::list<GridBox *> list;
+                std::list<GridBox<CircleObject> *> list;
                 for (int i = -1; i < 2; i++)
                 {
                     for (int j = -1; j < 2; j++)
@@ -126,12 +126,12 @@ namespace wEng
                     {
                         const int col = int(m_objects[i]->position.x / grid.box_w);
                         const int row = int(m_objects[i]->position.y / grid.box_h);
-                        GridBox &this_box = grid.boxes[col][row];
+                        GridBox<CircleObject> &this_box = grid.boxes[col][row];
                         if (this_box.checked) continue;
-                        std::list<GridBox *> adj_boxes = get_adjacent_boxes(col, row);
+                        std::list<GridBox<CircleObject> *> adj_boxes = get_adjacent_boxes(col, row);
                         for (auto it_adj_box = adj_boxes.begin(); it_adj_box != adj_boxes.end(); ++it_adj_box) 
                         {
-                            const GridBox * close_box = *it_adj_box;
+                            const GridBox<CircleObject> * close_box = *it_adj_box;
                             if (close_box->checked || close_box->obj_list.empty()) continue;
                             for (auto it_obj1 = this_box.obj_list.begin(); it_obj1 != this_box.obj_list.end(); ++it_obj1)
                             {
