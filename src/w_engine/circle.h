@@ -5,7 +5,7 @@
 
 namespace wEng
 {
-    class CircleObject: public WObject
+    class WCircleParticle: public WObject
     {
         private:
             float inv_mass;
@@ -17,10 +17,12 @@ namespace wEng
             {
                 this->id = id;
             }
-            CircleObject(float _radius, Vector2 start_pos, Color color):
-                WObject{start_pos}, radius(_radius), color(color)
+            WCircleParticle(float _radius, Vector2 start_pos, Color color): 
+                WObject{start_pos}, 
+                radius(_radius), 
+                color(color)
                 {
-                mass = PI * radius * radius;
+                    mass = PI * radius * radius;
                     inv_mass = 1.0f / mass;
                 }
             void draw()
