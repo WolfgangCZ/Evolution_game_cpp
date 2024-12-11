@@ -64,7 +64,7 @@ int main()
 {
     std::cout << "START" << std::endl;
     InitWindow(GConfig::config.win_w, GConfig::config.win_h, "HELLO WORLD");
-    std::vector<wEng::CircleObject *> all_objects;
+    std::vector<wEng::WCircleParticle *> all_objects;
     all_objects.reserve(10000);
     wEng::WSolver solver = wEng::WSolver{all_objects};
     solver.set_substeps(SUB_STEPS);
@@ -89,7 +89,7 @@ int main()
         {
             const Vector2 start_pos = Vector2(GetMousePosition());
             Color color = Color{RAND_CHAR, RAND_CHAR, RAND_CHAR, 255};
-            all_objects.push_back(new wEng::CircleObject{RAND_FLOAT(2, (int)MAX_BALL_RADIUS), start_pos, color});
+            all_objects.push_back(new wEng::WCircleParticle{RAND_FLOAT(2, (int)MAX_BALL_RADIUS), start_pos, color});
         }
         if (IsKeyPressed(KEY_C))
         {

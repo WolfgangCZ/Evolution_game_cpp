@@ -1,3 +1,6 @@
 #include <vector>
+#include "../w_object.h"
+#include "../circle.h"
 
-std::vector
+
+std::vector<WObject *> 
