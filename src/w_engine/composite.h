@@ -1,13 +1,16 @@
 #include "w_object.h"
+#include <vector>
 
 
 namespace wEng
 {
     class WComposite
     {
-        const &std::vector<WObject *> m_objects;
-        WComposite(const &std::vector<WObject *> w_objects): m_objects(w_objects)
-        {
-        }
+        private:
+            const std::vector<WObject *> &m_objects;
+        public:
+            WComposite(const std::vector<WObject *> &w_objects): m_objects(w_objects)
+            {}
+
     };
 }

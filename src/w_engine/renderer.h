@@ -2,17 +2,17 @@
 
 #include <vector>
 
-#include "../include/raylib.h"
-#include "w_engine/circle.h"
+#include "../../include/raylib.h"
+#include "circle.h"
 
 namespace wEng
 {
     class Renderer
     {
         private:
-            const std::vector<wEng::CircleObject *> &m_objects;
+            const std::vector<wEng::WCircleParticle *> &m_objects;
         public:
-            Renderer(const std::vector<wEng::CircleObject *> &objects):
+            Renderer(const std::vector<wEng::WCircleParticle *> &objects):
                 m_objects(objects)
             {}
             void render()
