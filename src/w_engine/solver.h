@@ -6,7 +6,7 @@
 
 #include "../../include/raylib.h"
 #include "../config.h"
-#include "w_object.h"
+#include "w_point.h"
 #include "circle.h"
 #include "grid.h"
 #include "settings.h"
@@ -18,16 +18,16 @@ namespace wEng
     class WSolver
     {
         private:
-            const std::vector<CircleObject *> &m_objects;
-            std::vector<std::function<void(CircleObject *)>> operations;
+            const std::vector<WCircleParticle *> &m_objects;
+            std::vector<std::function<void(WCircleParticle *)>> operations;
             size_t m_substeps = settings.sub_steps;
-            SolverGrid<CircleObject> grid;
+            SolverGrid<WCircleParticle> grid;
 
         public:
-            WSolver(const std::vector<CircleObject *> &objects): m_objects(objects), grid(SolverGrid<CircleObject>{})
+            WSolver(const std::vector<WCircleParticle *> &objects): m_objects(objects), grid(SolverGrid<WCircleParticle>{})
             {
             }
-            const SolverGrid<CircleObject> &get_grid() const
+            const SolverGrid<WCircleParticle> &get_grid() const
             {
                 return grid;
             }
@@ -36,7 +36,7 @@ namespace wEng
                 grid.clear();
                 for (size_t i = 0; i < m_objects.size(); i++)
                 {
-                    CircleObject * circle = m_objects[i];
+                    WCircleParticle * circle = m_objects[i];
                     int col = int(circle->position.x / grid.box_w);
                     int row = int(circle->position.y / grid.box_h);
                     grid.boxes[col][row].obj_list.push_back(circle);
@@ -70,13 +70,13 @@ namespace wEng
             void update_positions(float dt)
             {
                 const float step_dt = get_step_dt(dt);
-                operations.push_back([step_dt, this](CircleObject * circle){
+                operations.push_back([step_dt, this](WCircleParticle * circle){
                     circle->update_position(step_dt);
                 });
             }
-            std::list<GridBox<CircleObject> *> get_adjacent_boxes(int col, int row)
+            std::list<GridBox<WCircleParticle> *> get_adjacent_boxes(int col, int row)
             {
-                std::list<GridBox<CircleObject> *> list;
+                std::list<GridBox<WCircleParticle> *> list;
                 for (int i = -1; i < 2; i++)
                 {
                     for (int j = -1; j < 2; j++)
@@ -92,7 +92,7 @@ namespace wEng
             }
             void apply_boundary()
             {
-                operations.push_back([&](CircleObject * circle){
+                operations.push_back([&](WCircleParticle * circle){
                     const float boundary_width = grid.box_w * (grid.cols - 1);
                     const float boundary_height = grid.box_h * (grid.rows - 1);
                     if (circle->position.x - circle->radius < grid.box_w)
@@ -120,25 +120,25 @@ namespace wEng
 
             void apply_collision()
             {
-                operations.push_back([this](const CircleObject * circle)
+                operations.push_back([this](const WCircleParticle * circle)
                 {
                     for (size_t i = 0; i < m_objects.size(); i++)
                     {
                         const int col = int(m_objects[i]->position.x / grid.box_w);
                         const int row = int(m_objects[i]->position.y / grid.box_h);
-                        GridBox<CircleObject> &this_box = grid.boxes[col][row];
+                        GridBox<WCircleParticle> &this_box = grid.boxes[col][row];
                         if (this_box.checked) continue;
-                        std::list<GridBox<CircleObject> *> adj_boxes = get_adjacent_boxes(col, row);
+                        std::list<GridBox<WCircleParticle> *> adj_boxes = get_adjacent_boxes(col, row);
                         for (auto it_adj_box = adj_boxes.begin(); it_adj_box != adj_boxes.end(); ++it_adj_box) 
                         {
-                            const GridBox<CircleObject> * close_box = *it_adj_box;
+                            const GridBox<WCircleParticle> * close_box = *it_adj_box;
                             if (close_box->checked || close_box->obj_list.empty()) continue;
                             for (auto it_obj1 = this_box.obj_list.begin(); it_obj1 != this_box.obj_list.end(); ++it_obj1)
                             {
-                                CircleObject *obj1 = *it_obj1;
+                                WCircleParticle *obj1 = *it_obj1;
                                 for (auto it_obj2 = (*it_adj_box)->obj_list.begin(); it_obj2 != (*it_adj_box)->obj_list.end(); ++it_obj2)
                                 {
-                                    CircleObject *obj2 = *it_obj2;
+                                    WCircleParticle *obj2 = *it_obj2;
                                     if (obj1 == obj2) continue;
                                     const float dist_nosqrt = pow(obj1->position.x - obj2->position.x, 2) +
                                                             pow(obj1->position.y - obj2->position.y, 2);

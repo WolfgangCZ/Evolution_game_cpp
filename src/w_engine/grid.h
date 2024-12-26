@@ -5,10 +5,10 @@
 #include <vector>
 
 #include "../../include/raylib.h"
-#include "body.h"
+#include "w_point.h"
 #include "circle.h"
 #include "settings.h"
-#include "../src/config.h"
+#include "../config.h"
 
 namespace wEng
 {

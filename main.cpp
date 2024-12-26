@@ -9,7 +9,6 @@
 #include <chrono>
 #include <cstring>
 
-
 #include "./include/raylib.h"
 #include "./include/raymath.h"
 #include "./src/geometry.h"
@@ -68,7 +67,7 @@ int main()
     all_objects.reserve(10000);
     wEng::WSolver solver = wEng::WSolver{all_objects};
     solver.set_substeps(SUB_STEPS);
-    wEng::Renderer renderer = wRen::Renderer(all_objects);
+    wEng::Renderer renderer = wEng::Renderer(all_objects);
 
     SetTargetFPS(60);
 
@@ -79,7 +78,7 @@ int main()
 
         BeginDrawing();
         ClearBackground(GConfig::config.background_color);
-        wRen::draw_grid(wEng::GRID_COLS, 
+        wEng::draw_grid(wEng::GRID_COLS, 
                         wEng::GRID_ROWS, 
                         wEng::GRID_BOX_W, 
                         wEng::GRID_BOX_H

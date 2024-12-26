@@ -1,11 +1,11 @@
 #pragma once
 
 #include "../../include/raylib.h"
-#include "w_object.h"
+#include "w_point.h"
 
 namespace wEng
 {
-    class WCircleParticle: public WObject
+    class WCircleParticle: public WPoint
     {
         private:
             float inv_mass;
@@ -18,7 +18,7 @@ namespace wEng
                 this->id = id;
             }
             WCircleParticle(float _radius, Vector2 start_pos, Color color): 
-                WObject{start_pos}, 
+                WPoint{start_pos}, 
                 radius(_radius), 
                 color(color)
                 {
